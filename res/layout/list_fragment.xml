@@ -6,7 +6,7 @@
    <LinearLayout 
        android:layout_width="match_parent"
        android:layout_height="40dp"
-       android:background="#ff6083f7"
+       android:background="#0a5"
        >
        <TextView 
            android:layout_width="wrap_content"

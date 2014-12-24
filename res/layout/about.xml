@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#BDB6AF">
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="关于我们"
+        android:textSize="30sp"
+        android:background="#0a5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/add_label"
+        android:gravity="center_horizontal"
+        android:textStyle="italic"/>
+
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:text="名称：实验室预约管理系统\n开发者：fanz\n邮箱：fanz_lei@126.com\nQQ：872988104\n备注：欢迎大家与我交流\n项目源码：https://github.com/fanzlei/LabManager_Android"/>
+</LinearLayout>

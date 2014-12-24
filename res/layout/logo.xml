@@ -8,7 +8,7 @@
         android:paddingTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="广东石油化工学院实验室预约系统"
+        android:text="实验室预约系统"
         android:textColor="#ffb86f35"
         android:textSize="30sp"
         android:paddingLeft="10dp"
