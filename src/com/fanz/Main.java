@@ -10,7 +10,10 @@ import com.fragment.MyListFragment;
 import com.fragment.SettingFragment;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -36,10 +39,9 @@ public class Main extends Activity {
 		myListFragment=new MyListFragment();
 		settingFragment=new SettingFragment();
 		this.getFragmentManager().beginTransaction().replace(R.id.container, listFragment).commit();
-        /*Intent ini=new Intent();
-        ini.setAction("com.service.getPassStatus");
+        
         //启动service，定时获取预定是否被通过
-        this.startService(ini);*/
+		//setAlarm();
 	}
 
 	public void showList(View v){
@@ -71,5 +73,27 @@ public class Main extends Activity {
 		return true;
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+	}
 
+	private void setAlarm(){
+		//创建定时器，没15分钟执行一次本service
+		AlarmManager alarm=(AlarmManager) this.getSystemService(Service.ALARM_SERVICE);
+				Intent in=new Intent();
+				in.setAction("com.service.getPassStatus");
+				PendingIntent pi=PendingIntent.getService(this, 0, in, 0);
+				alarm.setRepeating(AlarmManager.ELAPSED_REALTIME,60, 60, pi);
+		/*timer=new Timer();
+				timer.schedule(new TimerTask(){
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						GetStatus.this.startService(new Intent("com.service.getPassStatus"));
+					}}, 20000,20000);*/
+	}
 }

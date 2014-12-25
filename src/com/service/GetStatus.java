@@ -24,12 +24,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
-public class GetStatus extends IntentService{
+public class GetStatus extends Service{
 
-	public GetStatus(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
+	
 	JSONArray ja;
 	SharedPreferences sp;
 	AlarmManager alarm;
@@ -93,8 +90,12 @@ public class GetStatus extends IntentService{
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("serviece stoped");
+				this.stopSelf();
 			}
 		}
+		this.stopSelf();
+		System.out.println("serviece stoped");
 	}
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -128,7 +129,7 @@ public class GetStatus extends IntentService{
 		super.onCreate();
 		sp=this.getSharedPreferences("localSave", this.MODE_WORLD_READABLE);
 
-		setAlarm();
+		//setAlarm();
 	}
 
 	@Override
@@ -136,6 +137,7 @@ public class GetStatus extends IntentService{
 		// TODO Auto-generated method stub  
 		User user=new User();
 		user.setName(sp.getString("name", ""));
+		System.out.println("serviece started");
         new UserNet().getMyList(this, user, handler);
 		
 		return super.onStartCommand(intent, flags, startId);
@@ -143,19 +145,19 @@ public class GetStatus extends IntentService{
 
 	private void setAlarm(){
 		//创建定时器，没15分钟执行一次本service
-				/*alarm=(AlarmManager) this.getSystemService(Service.ALARM_SERVICE);
+				alarm=(AlarmManager) this.getSystemService(Service.ALARM_SERVICE);
 				Intent in=new Intent();
 				in.setAction("com.service.getPassStatus");
 				PendingIntent pi=PendingIntent.getService(this, 0, in, 0);
-				alarm.setRepeating(AlarmManager.ELAPSED_REALTIME,60, 60, pi);*/
-		timer=new Timer();
+				alarm.setRepeating(AlarmManager.ELAPSED_REALTIME,60, 60, pi);
+		/*timer=new Timer();
 				timer.schedule(new TimerTask(){
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						GetStatus.this.startService(new Intent("com.service.getPassStatus"));
-					}}, 20000,20000);
+					}}, 20000,20000);*/
 	}
 	@Override
 	public void onDestroy() {
@@ -165,12 +167,7 @@ public class GetStatus extends IntentService{
 		in.setAction("com.service.getPassStatus");
 		PendingIntent pi=PendingIntent.getService(this, 0, in, 0);
 		alarm.cancel(pi);*/
-		timer.cancel();
-	}
-	@Override
-	protected void onHandleIntent(Intent intent) {
-		// TODO Auto-generated method stub
-		
+		//timer.cancel();
 	}
 
 

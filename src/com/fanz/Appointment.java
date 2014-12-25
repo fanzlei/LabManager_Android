@@ -1,6 +1,8 @@
 package com.fanz;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 import com.net.AppoNet;
 import com.utils.Appo;
@@ -24,7 +26,7 @@ public class Appointment extends Activity{
 	Spinner date_part,number;
 	DatePicker date;
 	int lab_no;
-	Date dd=new Date(2014,12,23);
+	Date dd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -52,15 +54,9 @@ public class Appointment extends Activity{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		date.init(2014, 12, 23, new OnDateChangedListener(){
-
-			@SuppressWarnings("deprecation")
-			@Override
-			public void onDateChanged(DatePicker view, int year,
-					int monthOfYear, int dayOfMonth) {
-				// TODO Auto-generated method stub
-				dd=new Date(year, monthOfYear, dayOfMonth);
-			}});
+		dd=new Date(System.currentTimeMillis());
+		date.init(2013, 12, 24, null);
+		
 	}
 
 	public void cancle(View v){
@@ -75,7 +71,7 @@ public class Appointment extends Activity{
 			appo.setDate_part(date_part.getSelectedItemPosition()+1);
 			appo.setNumber(Integer.valueOf((String)number.getSelectedItem()));
 			appo.setName(appoint_name.getText().toString());
-			appo.setDate(dd);
+			appo.setDate(new Date(date.getYear()-1900,date.getMonth(),date.getDayOfMonth()));
 			new AppoNet().add(this, appo);
 		}else{
 			Toast.makeText(this, "您的账号尚未被审核通过，请联系管理员",Toast.LENGTH_SHORT ).show();

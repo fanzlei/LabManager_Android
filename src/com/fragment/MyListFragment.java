@@ -52,8 +52,8 @@ public class MyListFragment extends Fragment{
 	};
 	public static  void setAdapter(){
 		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-		/*SharedPreferences sp=activity.getSharedPreferences("localSave", activity.MODE_WORLD_READABLE);
-		SharedPreferences.Editor ed=sp.edit();*/
+		SharedPreferences sp=activity.getSharedPreferences("localSave", activity.MODE_WORLD_READABLE);
+		SharedPreferences.Editor ed=sp.edit();
 		for(int i=0;i<ja.length();i++){
 			Map<String,Object> map=new HashMap<String,Object>();
 			try {
@@ -67,14 +67,14 @@ public class MyListFragment extends Fragment{
 				map.put("id", jo.getInt("id"));
 				//把我的预约ID对应的pass_status保存到本地。
 				//在后台service查询pass_status的时候比较本地的pass_status是否一致，不一致则发送通知。
-				//ed.putInt(String.valueOf(jo.getInt("id")), jo.getInt("pass_status"));
+				ed.putInt(String.valueOf(jo.getInt("id")), jo.getInt("pass_status"));
 				list.add(map);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		//ed.commit();
+		ed.commit();
 		SimpleAdapter adapter=new SimpleAdapter(activity, list,
 				R.layout.mylist_item, new String[]{"name","date","date_part","number","pass_status"},
 				new int[]{R.id.mylist_item_name,R.id.mylist_item_date,R.id.mylist_item_date_part,

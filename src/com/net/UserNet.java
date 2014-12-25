@@ -181,7 +181,6 @@ public class UserNet implements MyTaskListener{
 				break;
 			case "getTeacherByLab_no":
 				try {
-					System.out.println((String)joo);
 					JSONObject jo=new JSONObject((String)joo);
 					Message msg=new Message();
 					msg.what=444;
