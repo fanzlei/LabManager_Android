@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.fanz.R;
 import com.net.AppoNet;
 import com.net.UserNet;
 import com.utils.Appo;
 import com.utils.User;
-
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,11 +30,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+@TargetApi(Build.VERSION_CODES.KITKAT)
 public class MyListFragment extends Fragment{
 
     static ListView listView;
 	static JSONArray ja;
 	static Activity activity;
+	static int deletedId=-1;
 	public static Handler handler=new Handler(){
 
 		@Override
@@ -47,6 +48,7 @@ public class MyListFragment extends Fragment{
 				setAdapter();
 			}
 			
+			
 		}
 		
 	};
@@ -57,7 +59,7 @@ public class MyListFragment extends Fragment{
 		for(int i=0;i<ja.length();i++){
 			Map<String,Object> map=new HashMap<String,Object>();
 			try {
-				JSONObject jo=(JSONObject) ja.get(i);
+				JSONObject jo=(JSONObject) ja.get(ja.length()-i-1);
 				//用户名不用显示了，把实验室编号转换为实验室名称
 				map.put("name", lab_noToLab_name(jo.getInt("lab_no")));
 				map.put("date", jo.getString("date"));
@@ -133,7 +135,8 @@ public class MyListFragment extends Fragment{
 						HashMap<String,Object> map= (HashMap<String, Object>) parent.getItemAtPosition(position);
 							System.out.println("id="+map.get("id"));
 						appo.setId((int)map.get("id"));
-						new AppoNet().delete(activity, appo);
+						deletedId=(int) map.get("id");
+						new AppoNet().delete(activity, appo,handler);
 					}
 				}).show();
 				

@@ -15,9 +15,11 @@ import org.json.JSONObject;
 import com.fanz.Main;
 import com.net.MyTask.MyTaskListener;
 import com.utils.Appo;
+import com.utils.User;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
@@ -57,9 +59,10 @@ public class AppoNet implements MyTaskListener{
 				String.valueOf(ap.getNumber())};
 		new MyTask().execute(getHttpPost(key,values),this);
 	}
-	public void delete(Context context,Appo ap){
+	public void delete(Context context,Appo ap,Handler handler){
 		this.context=context;
 		tag="delete";
+		this.handler=handler;
 		String[] key=new String[]{"tag","id"};
 		String[] values=new String[]{"delete",String.valueOf(ap.getId())};
 		new MyTask().execute(getHttpPost(key,values),this);
@@ -110,8 +113,10 @@ public class AppoNet implements MyTaskListener{
 				JSONObject djo=new JSONObject((String)joo);
 				if(djo.getBoolean("delete")){
 					Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
-					Intent intent =new Intent(context,Main.class);
-					context.startActivity(intent);
+					SharedPreferences sp=context.getSharedPreferences("localSave", context.MODE_WORLD_READABLE);
+					User user=new User();
+					user.setName(sp.getString("name", ""));
+					new UserNet().getMyList(context, user, handler);
 				}else{
 					Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
 				}
