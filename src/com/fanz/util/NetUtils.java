@@ -8,7 +8,7 @@ public class NetUtils {
 	/**
 	 * @return 返回从输入流中读取的字符串
 	 * */
-	public static String getFromInputStream(InputStream is) {
+	public static String parseString(InputStream is) {
 		ByteArrayOutputStream bo = new ByteArrayOutputStream();
 		int len = 0;
 		String str = "";
@@ -19,7 +19,6 @@ public class NetUtils {
 			}
 			str = new String(bo.toByteArray(), "UTF-8");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -3,6 +3,7 @@ package com.fanz.app;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.fanz.app.R;
+import com.fanz.util.MessageUtil;
 import com.fanz.widget.fragment.ListFragment;
 import com.fanz.widget.fragment.MyListFragment;
 import com.fanz.widget.fragment.SettingFragment;
@@ -20,7 +21,7 @@ import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class Main extends Activity {
+public class Main extends BaseActivity {
 
 	boolean prepareExit = false;
 	Fragment listFragment, myListFragment, settingFragment;
@@ -28,11 +29,11 @@ public class Main extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.main);
+		
+		// 初始化fragments
 		listFragment = new ListFragment();
 		myListFragment = new MyListFragment();
 		settingFragment = new SettingFragment();
@@ -60,17 +61,14 @@ public class Main extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (!prepareExit) {
 				prepareExit = true;
-				Toast.makeText(Main.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+				MessageUtil.shortMessage(Main.this, "再按一次退出");
 				new Timer().schedule(new TimerTask() {
 
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						prepareExit = false;
 					}
 				}, 2000);
@@ -83,7 +81,6 @@ public class Main extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 
 	}

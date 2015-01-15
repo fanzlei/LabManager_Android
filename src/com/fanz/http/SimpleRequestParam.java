@@ -7,13 +7,20 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.fanz.util.Constant;
+
 /**
- * 请求参数封装类 这里Android端只是向服务器发送POST请求
+ * 请求参数封装类
+ * 
+ * 目前这里Android端只是向服务器发送POST请求
+ * 
+ * @author fanz
  * */
 public class SimpleRequestParam {
-
-	/** 网络请求的entity */
+	// 网络请求的entity
 	private UrlEncodedFormEntity urlEncodedFormEntity;
+
+	// 参数列表
 	private List<NameValuePair> list;
 
 	public SimpleRequestParam() {
@@ -21,18 +28,21 @@ public class SimpleRequestParam {
 		list = new ArrayList<NameValuePair>();
 	}
 
-	/** 添加参数到entity */
-	public void add2Entity(String key, String value) {
+	/**
+	 * 添加参数到entity
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void add(String key, String value) {
 		BasicNameValuePair pair = new BasicNameValuePair(key, value);
 		list.add(pair);
-
 	}
 
 	public UrlEncodedFormEntity getEntity() {
 		try {
-			urlEncodedFormEntity = new UrlEncodedFormEntity(list, "UTF-8");
+			urlEncodedFormEntity = new UrlEncodedFormEntity(list, Constant.CHARSET);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return urlEncodedFormEntity;

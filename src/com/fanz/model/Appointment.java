@@ -4,7 +4,13 @@ import java.sql.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Appo {
+/**
+ * 预约模型
+ * 
+ * @author fanz
+ * 
+ */
+public class Appointment {
 
 	private int id;
 	private Date date;
@@ -14,15 +20,16 @@ public class Appo {
 	private int lab_no;
 	private int pass_status;
 
-	public Appo() {
+	public Appointment() {
+
 	}
 
-	public Appo(JSONObject jo) throws JSONException {
-		date = (Date) jo.get("date");
-		date_part = jo.getInt("date_part");
-		name = jo.getString("name");
-		number = jo.getInt("number");
-		lab_no = jo.getInt("lab_no");
+	public Appointment(JSONObject json) throws JSONException {
+		date = (Date) json.get("date");
+		date_part = json.getInt("date_part");
+		name = json.getString("name");
+		number = json.getInt("number");
+		lab_no = json.getInt("lab_no");
 
 	}
 

@@ -11,18 +11,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-public class Login extends Activity {
+public class Login extends BaseActivity {
 
 	String name = "", pass = "";
 	EditText ed1, ed2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		this.setContentView(R.layout.login);
 		ed1 = (EditText) findViewById(R.id.login_name);
 		ed2 = (EditText) findViewById(R.id.login_pass);
@@ -35,6 +32,7 @@ public class Login extends Activity {
 		User user = new User();
 		user.setName(name);
 		user.setPass(pass);
+		
 		new ApiClientImpl(this).login(user);
 	}
 
@@ -45,7 +43,6 @@ public class Login extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		this.finish();
 	}

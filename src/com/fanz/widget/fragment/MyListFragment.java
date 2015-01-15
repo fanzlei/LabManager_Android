@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.fanz.app.R;
 import com.fanz.api.ApiClientImpl;
-import com.fanz.model.Appo;
+import com.fanz.model.Appointment;
 import com.fanz.model.User;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -142,7 +142,7 @@ public class MyListFragment extends Fragment {
 									public void onClick(DialogInterface dialog,
 											int which) {
 										// TODO Auto-generated method stub
-										Appo appo = new Appo();
+										Appointment appo = new Appointment();
 										HashMap<String, Object> map = (HashMap<String, Object>) parent
 												.getItemAtPosition(position);
 										System.out.println("id="

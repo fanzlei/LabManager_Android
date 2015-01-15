@@ -12,15 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-public class Logo extends Activity {
+public class Logo extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.logo);
 		final ImageView iv = (ImageView) findViewById(R.id.logo_imageView);
 		ValueAnimator anim = new ValueAnimator();

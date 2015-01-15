@@ -21,7 +21,7 @@ import android.os.Message;
 
 public class GetStatus extends Service {
 
-	JSONArray ja;
+	JSONArray jsons;
 	SharedPreferences sp;
 	AlarmManager alarm;
 	Timer timer;
@@ -29,33 +29,31 @@ public class GetStatus extends Service {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 111) {
-				ja = (JSONArray) msg.obj;
+				jsons = (JSONArray) msg.obj;
 				sendNotification();
 			}
 		}
 	};
 
 	private void sendNotification() {
-		// TODO Auto-generated method stub
-		JSONObject jo;
+		JSONObject json;
 		Intent inn = new Intent(this, Main.class);
 		PendingIntent ppi = PendingIntent.getActivity(this, 0, inn, 0);
-		for (int i = 0; i < ja.length(); i++) {
+		for (int i = 0; i < jsons.length(); i++) {
 			try {
-				jo = (JSONObject) ja.get(i);
-				if (jo.getInt("pass_status") != sp.getInt(
-						String.valueOf(jo.getInt("id")), 1)) {
+				json = (JSONObject) jsons.get(i);
+				if (json.getInt("pass_status") != sp.getInt(
+						String.valueOf(json.getInt("id")), 1)) {
 					NotificationManager nm = (NotificationManager) this
 							.getSystemService(Service.NOTIFICATION_SERVICE);
-					if (jo.getInt("pass_status") == 2) {
+					if (json.getInt("pass_status") == 2) {
 						Notification nf = new Notification.Builder(
 								GetStatus.this)
 								.setTicker("实验室预定已通过")
 								.setContentTitle(
-										lab_noToLab_name(jo.getInt("lab_no"))
+										lab_noToLab_name(json.getInt("lab_no"))
 												+ "已通过")
 								.setDefaults(
 										Notification.DEFAULT_SOUND
@@ -63,24 +61,24 @@ public class GetStatus extends Service {
 								.setWhen(System.currentTimeMillis())
 								.setContentText(
 										"实验日期："
-												+ jo.getString("date")
+												+ json.getString("date")
 												+ '\t'
-												+ date_partToString(jo
+												+ date_partToString(json
 														.getInt("date_part")))
 								.setContentIntent(ppi).setAutoCancel(true)
 								.setSmallIcon(R.drawable.ic_launcher)
 								.getNotification();
 						nm.notify(12345, nf);
 						SharedPreferences.Editor ed = sp.edit();
-						ed.putString(String.valueOf(jo.getInt("id")),
-								String.valueOf(jo.getInt("pass_status")));
+						ed.putString(String.valueOf(json.getInt("id")),
+								String.valueOf(json.getInt("pass_status")));
 						ed.commit();
-					} else if (jo.getInt("pass_status") == 3) {
+					} else if (json.getInt("pass_status") == 3) {
 						Notification nf = new Notification.Builder(
 								GetStatus.this)
 								.setTicker("实验室预定被拒绝")
 								.setContentTitle(
-										lab_noToLab_name(jo.getInt("lab_no"))
+										lab_noToLab_name(json.getInt("lab_no"))
 												+ "被拒绝")
 								.setDefaults(
 										Notification.DEFAULT_SOUND
@@ -88,22 +86,21 @@ public class GetStatus extends Service {
 								.setWhen(System.currentTimeMillis())
 								.setContentText(
 										"实验日期："
-												+ jo.getString("date")
+												+ json.getString("date")
 												+ '\t'
-												+ date_partToString(jo
+												+ date_partToString(json
 														.getInt("date_part")))
 								.setContentIntent(ppi).setAutoCancel(true)
 								.setSmallIcon(R.drawable.ic_launcher)
 								.getNotification();
 						nm.notify(12346, nf);
 						SharedPreferences.Editor ed = sp.edit();
-						ed.putString(String.valueOf(jo.getInt("id")),
-								String.valueOf(jo.getInt("pass_status")));
+						ed.putString(String.valueOf(json.getInt("id")),
+								String.valueOf(json.getInt("pass_status")));
 						ed.commit();
 					}
 				}
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println("serviece stoped");
 				this.stopSelf();
@@ -115,7 +112,6 @@ public class GetStatus extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -145,7 +141,6 @@ public class GetStatus extends Service {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		sp = this.getSharedPreferences("localSave", this.MODE_WORLD_READABLE);
 
@@ -154,7 +149,6 @@ public class GetStatus extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub
 		User user = new User();
 		user.setName(sp.getString("name", ""));
 		System.out.println("serviece started");
@@ -181,7 +175,6 @@ public class GetStatus extends Service {
 
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		/*
 		 * Intent in=new Intent(); in.setAction("com.service.getPassStatus");

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import com.fanz.app.R;
 import com.fanz.api.ApiClientImpl;
-import com.fanz.model.Appo;
+import com.fanz.model.Appointment;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,7 +66,7 @@ public class Appointment extends Activity {
 		SharedPreferences sp = this.getSharedPreferences("localSave",
 				this.MODE_WORLD_READABLE);
 		if (sp.getBoolean("pass_status", false)) {
-			Appo appo = new Appo();
+			Appointment appo = new Appointment();
 			appo.setLab_no(lab_no);
 			appo.setDate_part(date_part.getSelectedItemPosition() + 1);
 			appo.setNumber(Integer.valueOf((String) number.getSelectedItem()));

@@ -22,7 +22,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class Detail extends Activity {
+public class Detail extends BaseActivity {
 
 	static ListView listView;
 	static JSONArray ja;
@@ -32,7 +32,6 @@ public class Detail extends Activity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 333) {
 				ja = (JSONArray) msg.obj;
@@ -49,9 +48,7 @@ public class Detail extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.activity_detail);
 		activity = this;
 		Bundle bundle = this.getIntent().getExtras();
