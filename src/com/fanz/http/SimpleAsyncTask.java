@@ -7,7 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 
-import com.fanz.util.NetUtils;
+import com.fanz.util.StringUtil;
 import com.fanz.util.Tag;
 
 import android.os.AsyncTask;
@@ -38,7 +38,7 @@ public class SimpleAsyncTask extends AsyncTask<Object, java.lang.Void, Object> {
 			HttpResponse response = http.execute(request);
 
 			// 处理返回结果
-			result = NetUtils.parseString(response.getEntity().getContent());
+			result = StringUtil.parseString(response.getEntity().getContent());
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

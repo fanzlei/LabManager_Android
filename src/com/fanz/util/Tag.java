@@ -18,4 +18,6 @@ public class Tag {
 	public final static int ADD_APPOINTMENT = 0x0007;
 	public final static int REMOVE_APPOINTMENT = 0X0008;
 	public final static int GET_LAB_APPOINTMENT_LIST = 0x0009;
+	
+	
 }

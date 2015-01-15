@@ -24,45 +24,52 @@ import com.fanz.app.R;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.app.Detail;
 
+/**
+ * 列表fragment的简单封装
+ * 
+ * @author fanz
+ * 
+ */
 public class ListFragment extends Fragment {
 
 	static ListView listView;
-	static JSONArray ja;
+	static JSONArray jsons;
 	static Context context;
+
 	public static Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 222) {
-				ja = (JSONArray) msg.obj;
+				jsons = (JSONArray) msg.obj;
 				setAdapter();
 			}
 		}
 
 		private void setAdapter() {
-			// TODO Auto-generated method stub
 
 			SharedPreferences sp = context.getSharedPreferences("localSave",
 					context.MODE_WORLD_READABLE);
 			SharedPreferences.Editor ed = sp.edit();
+
 			List<Map<String, Object>> list = new ArrayList<>();
-			for (int i = 0; i < ja.length(); i++) {
+			for (int i = 0; i < jsons.length(); i++) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				try {
-					JSONObject jo = (JSONObject) ja.get(i);
-					map.put("name", jo.getString("name"));
-					map.put("id", jo.getInt("id"));
-					map.put("lab_no", jo.getInt("lab_no"));
-					map.put("describe", jo.getString("describe"));
+					JSONObject json = (JSONObject) jsons.get(i);
+					map.put("name", json.getString("name"));
+					map.put("id", json.getInt("id"));
+					map.put("lab_no", json.getInt("lab_no"));
+					map.put("describe", json.getString("describe"));
+
 					// 把Lab_no对应的Lab_name存入SharedPreference中，
 					// 用于MyListFragment中将lab_no转换为lab_name
-					ed.putString(String.valueOf(jo.getInt("lab_no")),
-							jo.getString("name"));
+					ed.putString(String.valueOf(json.getInt("lab_no")),
+							json.getString("name"));
+
 					list.add(map);
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				ed.commit();
@@ -77,7 +84,6 @@ public class ListFragment extends Fragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
 	}
@@ -85,7 +91,6 @@ public class ListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 
 		return inflater.inflate(R.layout.list_fragment, container, false);
 	}
@@ -102,17 +107,16 @@ public class ListFragment extends Fragment {
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int i, long l) {
 
-				JSONObject jo;
+				JSONObject json;
 
 				try {
-					jo = (JSONObject) ja.get(i);
+					json = (JSONObject) jsons.get(i);
 
 					Intent intent = new Intent(context, Detail.class);
-					intent.putExtra("lab_no", jo.getInt("lab_no"));
-					intent.putExtra("name", jo.getString("name"));
+					intent.putExtra("lab_no", json.getInt("lab_no"));
+					intent.putExtra("name", json.getString("name"));
 					context.startActivity(intent);
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

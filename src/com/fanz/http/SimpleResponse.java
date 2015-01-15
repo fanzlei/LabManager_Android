@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.fanz.util.NetUtils;
+import com.fanz.util.StringUtil;
 
 /**
  * 网络响应封装类
@@ -29,7 +29,7 @@ public class SimpleResponse {
 	public JSONObject getJSONObject() {
 		JSONObject json = null;
 		try {
-			String str = NetUtils
+			String str = StringUtil
 					.parseString(response.getEntity().getContent());
 			json = new JSONObject(str);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class SimpleResponse {
 	public JSONArray getJSONArray() {
 		JSONArray ja = null;
 		try {
-			String str = NetUtils
+			String str = StringUtil
 					.parseString(response.getEntity().getContent());
 			ja = new JSONArray(str);
 		} catch (IllegalStateException e) {
