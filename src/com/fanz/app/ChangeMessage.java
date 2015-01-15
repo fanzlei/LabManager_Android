@@ -1,10 +1,8 @@
 package com.fanz.app;
 
 import com.fanz.app.R;
-
-import com.fanz.api.UserNet;
+import com.fanz.api.ApiClientImpl;
 import com.fanz.model.User;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,9 +12,9 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ChangeMessage extends Activity{
+public class ChangeMessage extends Activity {
 
-	EditText oldPass,newPass,newPhone;
+	EditText oldPass, newPass, newPhone;
 	SharedPreferences sp;
 
 	@Override
@@ -24,37 +22,41 @@ public class ChangeMessage extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		this.setContentView(R.layout.change_message);
-		oldPass=(EditText) findViewById(R.id.oldPassword);
-		newPass=(EditText) this.findViewById(R.id.newPassword);
-		newPhone=(EditText) this.findViewById(R.id.newPhone);
-		sp=this.getSharedPreferences("localSave", this.MODE_WORLD_READABLE);
+		oldPass = (EditText) findViewById(R.id.oldPassword);
+		newPass = (EditText) this.findViewById(R.id.newPassword);
+		newPhone = (EditText) this.findViewById(R.id.newPhone);
+		sp = this.getSharedPreferences("localSave", this.MODE_WORLD_READABLE);
 		newPhone.setText(sp.getString("phone", ""));
-		
+
 	}
 
-	public void change(View v){
-		String op=oldPass.getText().toString().trim();
-		String np=newPass.getText().toString().trim();
-		String nph=newPhone.getText().toString().trim();
-		if(op!=null&&op!=""){
-			if(op.equals(sp.getString("pass", ""))){
-				if(np!=null&&np!=""){
-					User user=new User();
+	public void change(View v) {
+		String op = oldPass.getText().toString().trim();
+		String np = newPass.getText().toString().trim();
+		String nph = newPhone.getText().toString().trim();
+		if (op != null && op != "") {
+			if (op.equals(sp.getString("pass", ""))) {
+				if (np != null && np != "") {
+					User user = new User();
 					user.setName(sp.getString("name", ""));
 					user.setPass(np);
 					user.setPhone(nph);
-					new UserNet().updateUser(this, user);
-				}else{
-					User user=new User();
+					new ApiClientImpl(this).updateUser(user);
+				} else {
+					User user = new User();
 					user.setName(sp.getString("name", ""));
 					user.setPass(sp.getString("pass", ""));
 					user.setPhone(nph);
-					new UserNet().updateUser(this, user);
+					new ApiClientImpl(this).updateUser(user);
 				}
-			}else{Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();}
-		}else{ Toast.makeText(this, "请输入当前密码", Toast.LENGTH_SHORT).show();}
+			} else {
+				Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			Toast.makeText(this, "请输入当前密码", Toast.LENGTH_SHORT).show();
+		}
 	}
 }

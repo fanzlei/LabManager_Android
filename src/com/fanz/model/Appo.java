@@ -1,7 +1,6 @@
 package com.fanz.model;
 
 import java.sql.Date;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

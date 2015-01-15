@@ -1,27 +1,35 @@
 package com.fanz.http;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Message;
 import android.widget.Toast;
-
 import com.fanz.api.ApiClientImpl;
+import com.fanz.app.Detail;
+import com.fanz.app.Login;
 import com.fanz.app.Main;
+import com.fanz.model.User;
+import com.fanz.widget.fragment.ListFragment;
+import com.fanz.widget.fragment.MyListFragment;
+
 /**
- * 网络访问返回结果处理类
- * 对不同的网络请求分别进行不同处理
+ * 网络访问返回结果处理类 对不同的网络请求分别进行不同处理
+ * 
  * @author Fanz
  * 
  * */
 public class ResponseOperator {
-	public static void doLogin(SimpleResponse response) {
+	public static void doLogin(String jsonString) {
 
 		Context context = ApiClientImpl.context;
-		JSONObject jo = response.getJSONObject();
+		JSONObject jo;
 		try {
+			System.out.println(jsonString);
+			jo = new JSONObject(jsonString);
 			if (jo.getBoolean("login")) {
 				Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 				// 登录成功后保存用户信息到本地
@@ -47,35 +55,134 @@ public class ResponseOperator {
 		}
 	}
 
-	public static void doRegister(SimpleResponse response) {
+	public static void doRegister(String jsonString) {
+		try {
+			JSONObject jo = new JSONObject(jsonString);
+			if (jo.getBoolean("register")) {
+				Toast.makeText(ApiClientImpl.context, "注册成功",
+						Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(ApiClientImpl.context, Login.class);
+				ApiClientImpl.context.startActivity(intent);
 
+			} else {
+				Toast.makeText(ApiClientImpl.context, "注册失败",
+						Toast.LENGTH_SHORT).show();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doUpdateUser(SimpleResponse response) {
-
+	public static void doUpdateUser(String jsonString) {
+		try {
+			JSONObject ujo = new JSONObject(jsonString);
+			if (ujo.getBoolean("updateUser")) {
+				Toast.makeText(ApiClientImpl.context, "更改用户信息成功",
+						Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(ApiClientImpl.context, Main.class);
+				ApiClientImpl.context.startActivity(intent);
+			} else {
+				Toast.makeText(ApiClientImpl.context, "操作失败",
+						Toast.LENGTH_SHORT).show();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doGetMyList(SimpleResponse response) {
-
+	public static void doGetMyList(String jsonString) {
+		try {
+			JSONArray ja = new JSONArray(jsonString);
+			Message msg = new Message();
+			msg.obj = ja;
+			msg.what = 111;
+			MyListFragment.handler.sendMessage(msg);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doGetTeacherByLab_no(SimpleResponse response) {
+	public static void doGetTeacherByLab_no(String jsonString) {
+		try {
+			JSONObject jo = new JSONObject(jsonString);
+			Message msg = new Message();
+			msg.what = 444;
+			msg.obj = jo;
+			Detail.handler.sendMessage(msg);
 
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doAdd(SimpleResponse response) {
-
+	public static void doAdd(String jsonString) {
+		try {
+			JSONObject jo = new JSONObject(jsonString);
+			if (jo.getBoolean("add")) {
+				Toast.makeText(ApiClientImpl.context, "预定成功",
+						Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(ApiClientImpl.context, Main.class);
+				ApiClientImpl.context.startActivity(intent);
+			} else {
+				Toast.makeText(ApiClientImpl.context, "预定失败",
+						Toast.LENGTH_SHORT).show();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doDelete(SimpleResponse response) {
-
+	public static void doDelete(String jsonString) {
+		try {
+			JSONObject djo = new JSONObject(jsonString);
+			if (djo.getBoolean("delete")) {
+				Toast.makeText(ApiClientImpl.context, "删除成功",
+						Toast.LENGTH_SHORT).show();
+				SharedPreferences sp = ApiClientImpl.context
+						.getSharedPreferences("localSave",
+								ApiClientImpl.context.MODE_WORLD_READABLE);
+				User user = new User();
+				user.setName(sp.getString("name", ""));
+				new ApiClientImpl(ApiClientImpl.context).getMyList(user);
+			} else {
+				Toast.makeText(ApiClientImpl.context, "删除失败",
+						Toast.LENGTH_SHORT).show();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doGetLabList(SimpleResponse response) {
-
+	public static void doGetLabList(String jsonString) {
+		try {
+			JSONArray ja = new JSONArray(jsonString);
+			Message msg = new Message();
+			msg.what = 222;
+			msg.obj = ja;
+			ListFragment.handler.sendMessage(msg);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static void doGetAppoListByLab_no(SimpleResponse response) {
-
+	public static void doGetAppoListByLab_no(String jsonString) {
+		JSONArray jaa;
+		try {
+			jaa = new JSONArray(jsonString);
+			Message msg = new Message();
+			msg.what = 333;
+			msg.obj = jaa;
+			Detail.handler.sendMessage(msg);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

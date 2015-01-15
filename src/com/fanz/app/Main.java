@@ -2,13 +2,10 @@ package com.fanz.app;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.fanz.app.R;
-
 import com.fanz.widget.fragment.ListFragment;
 import com.fanz.widget.fragment.MyListFragment;
 import com.fanz.widget.fragment.SettingFragment;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Fragment;

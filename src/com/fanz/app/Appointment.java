@@ -3,10 +3,8 @@ package com.fanz.app;
 import java.sql.Date;
 
 import com.fanz.app.R;
-
-import com.fanz.api.AppoNet;
+import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Appo;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -75,7 +73,7 @@ public class Appointment extends Activity {
 			appo.setName(appoint_name.getText().toString());
 			appo.setDate(new Date(date.getYear() - 1900, date.getMonth(), date
 					.getDayOfMonth()));
-			new AppoNet().add(this, appo);
+			new ApiClientImpl(this).addAppo(appo);
 		} else {
 			Toast.makeText(this, "您的账号尚未被审核通过，请联系管理员", Toast.LENGTH_SHORT)
 					.show();

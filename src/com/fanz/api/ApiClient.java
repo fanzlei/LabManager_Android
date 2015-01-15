@@ -11,13 +11,21 @@ import com.fanz.model.User;
  *
  */
 public interface ApiClient {
-void login(User user);
-void register(User user);
-void updateUser(User user);
-void getMyList(User user);
-void getTeacherByLab_no(Lab lab);
-void addAppo(Appo appo);
-void deleteAppo(Appo appo);
-void getLabList();
-void getAppoListByLab_no(Lab lab);
+	void login(User user);
+
+	void register(User user);
+
+	void updateUser(User user);
+
+	void getMyList(User user);
+
+	void getTeacherByLab_no(Lab lab);
+
+	void addAppo(Appo appo);
+
+	void deleteAppo(Appo appo);
+
+	void getLabList();
+
+	void getAppoListByLab_no(Lab lab);
 }

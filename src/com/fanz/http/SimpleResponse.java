@@ -1,7 +1,6 @@
 package com.fanz.http;
 
 import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,9 +42,26 @@ public class SimpleResponse {
 		return jo;
 	}
 
+	/**
+	 * @return 返回从响应中获取的JSONArray对象
+	 * */
 	public JSONArray getJSONArray() {
-
-		return null;
+		JSONArray ja = null;
+		try {
+			String str = NetUtils.getFromInputStream(response.getEntity()
+					.getContent());
+			ja = new JSONArray(str);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ja;
 	}
 
 	public String toString() {
