@@ -1,6 +1,10 @@
 package com.fanz.app;
 
+import com.fanz.api.ApiClient;
+import com.fanz.api.ApiClientFactory;
+
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,4 +18,5 @@ public class BaseActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	}
+	
 }

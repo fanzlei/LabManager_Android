@@ -30,9 +30,9 @@ public class Main extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.main);
-		
+
 		// 初始化fragments
 		listFragment = new ListFragment();
 		myListFragment = new MyListFragment();
@@ -45,18 +45,20 @@ public class Main extends BaseActivity {
 	}
 
 	public void showList(View v) {
-		getFragmentManager().beginTransaction()
-				.replace(R.id.container, listFragment).commit();
+		showFragment(v, listFragment);
 	}
 
 	public void showMyList(View v) {
-		getFragmentManager().beginTransaction()
-				.replace(R.id.container, myListFragment).commit();
+		showFragment(v, myListFragment);
 	}
 
 	public void showConfiguration(View v) {
+		showFragment(v, settingFragment);
+	}
+
+	private void showFragment(View v, Fragment fragment) {
 		getFragmentManager().beginTransaction()
-				.replace(R.id.container, settingFragment).commit();
+				.replace(R.id.container, fragment).commit();
 	}
 
 	@Override
@@ -66,23 +68,17 @@ public class Main extends BaseActivity {
 				prepareExit = true;
 				MessageUtil.shortMessage(Main.this, "再按一次退出");
 				new Timer().schedule(new TimerTask() {
-
 					@Override
 					public void run() {
 						prepareExit = false;
 					}
 				}, 2000);
 			} else {
+				// 退出应用
 				Main.this.finish();
 			}
 		}
 		return true;
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
 	}
 
 	private void setAlarm() {

@@ -126,7 +126,7 @@ public class Detail extends BaseActivity {
 	}
 
 	public void appointment(View v) {
-		Intent intent = new Intent(this, Appointment.class);
+		Intent intent = new Intent(this, AppointmentActivity.class);
 		Bundle bundle = this.getIntent().getExtras();
 		intent.putExtras(bundle);
 		this.startActivity(intent);

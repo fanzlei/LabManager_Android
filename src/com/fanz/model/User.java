@@ -30,6 +30,11 @@ public class User {
 		classes = json.getString("classes");
 	}
 
+	public User(String username, String password) {
+		this.name = username;
+		this.pass = password;
+	}
+
 	public int getId() {
 		return id;
 	}
