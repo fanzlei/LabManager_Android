@@ -152,7 +152,7 @@ public class GetStatus extends Service {
 		User user = new User();
 		user.setName(sp.getString("name", ""));
 		System.out.println("serviece started");
-		new ApiClientImpl(this).getMyList(user);
+		new ApiClientImpl(this).getUserAppointments(user);
 
 		return super.onStartCommand(intent, flags, startId);
 	}

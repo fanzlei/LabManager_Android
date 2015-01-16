@@ -103,7 +103,7 @@ public class ListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		context = this.getActivity();
-		ApiClientFactory.createApiClient(context).getLabList();
+		ApiClientFactory.createApiClient(context).getAllLabs();
 		listView = (ListView) this.getActivity().findViewById(
 				R.id.list_fragment_list);
 		//实验室列表列表项用户点击事件监听

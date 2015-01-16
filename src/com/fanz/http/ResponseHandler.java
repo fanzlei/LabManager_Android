@@ -23,8 +23,11 @@ import com.fanz.widget.fragment.MyListFragment;
  * 
  * */
 public class ResponseHandler {
-	public static Context context() {
-		return ApiClientImpl.context;
+	
+	Context context;
+	
+	public ResponseHandler(Context context){
+		this.context = context;
 	}
 
 	/**
@@ -32,15 +35,13 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doLogin(String jsonString) {
-
-		Context context = context();
+	public void doLogin(String jsonString) {
 		JSONObject json;
 		try {
 			System.out.println(jsonString);
 			json = new JSONObject(jsonString);
 			if (json.getBoolean("login")) {
-				MessageUtil.shortMessage(context(), "登录成功");
+				MessageUtil.shortMessage(context, "登录成功");
 
 				// 登录成功后保存用户信息到本地
 				SharedPreferences sp = context.getSharedPreferences(
@@ -59,7 +60,7 @@ public class ResponseHandler {
 				context.startActivity(intent);
 
 			} else {
-				MessageUtil.shortMessage(context(), "用户名或密码错误");
+				MessageUtil.shortMessage(context, "用户名或密码错误");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -71,16 +72,16 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doRegister(String jsonString) {
+	public void doRegister(String jsonString) {
 		try {
 			JSONObject json = new JSONObject(jsonString);
 			if (json.getBoolean("register")) {
-				MessageUtil.shortMessage(context(), "注册成功");
+				MessageUtil.shortMessage(context, "注册成功");
 
-				Intent intent = new Intent(context(), Login.class);
-				context().startActivity(intent);
+				Intent intent = new Intent(context, Login.class);
+				context.startActivity(intent);
 			} else {
-				MessageUtil.shortMessage(context(), "注册失败");
+				MessageUtil.shortMessage(context, "注册失败");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -92,16 +93,16 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doUpdateUser(String jsonString) {
+	public void doUpdateUser(String jsonString) {
 		try {
-			JSONObject ujo = new JSONObject(jsonString);
-			if (ujo.getBoolean("updateUser")) {
-				MessageUtil.shortMessage(context(), "更改用户信息成功");
+			JSONObject json = new JSONObject(jsonString);
+			if (json.getBoolean("updateUser")) {
+				MessageUtil.shortMessage(context, "更改用户信息成功");
 
-				Intent intent = new Intent(context(), Main.class);
-				context().startActivity(intent);
+				Intent intent = new Intent(context, Main.class);
+				context.startActivity(intent);
 			} else {
-				MessageUtil.shortMessage(context(), "操作失败");
+				MessageUtil.shortMessage(context, "操作失败");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -113,7 +114,7 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doGetMyList(String jsonString) {
+	public void doGetUserAppointments(String jsonString) {
 		try {
 			JSONArray jsons = new JSONArray(jsonString);
 			Message msg = new Message();
@@ -130,7 +131,7 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doGetTeacherByLab_no(String jsonString) {
+	public void doGetLabTeacher(String jsonString) {
 		try {
 			JSONObject json = new JSONObject(jsonString);
 			Message msg = new Message();
@@ -148,15 +149,15 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doAddAppointment(String jsonString) {
+	public void doAddAppointment(String jsonString) {
 		try {
 			JSONObject json = new JSONObject(jsonString);
 			if (json.getBoolean("add")) {
-				MessageUtil.shortMessage(context(), "预定成功");
-				Intent intent = new Intent(context(), Main.class);
-				context().startActivity(intent);
+				MessageUtil.shortMessage(context, "预定成功");
+				Intent intent = new Intent(context, Main.class);
+				context.startActivity(intent);
 			} else {
-				MessageUtil.shortMessage(context(), "预定失败");
+				MessageUtil.shortMessage(context, "预定失败");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -168,20 +169,20 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doDeleteAppointment(String jsonString) {
+	public void doDeleteAppointment(String jsonString) {
 		try {
 			JSONObject json = new JSONObject(jsonString);
 			if (json.getBoolean("delete")) {
-				MessageUtil.shortMessage(context(), "删除成功");
+				MessageUtil.shortMessage(context, "删除成功");
 
-				SharedPreferences sp = context().getSharedPreferences(
-						"localSave", context().MODE_WORLD_READABLE);
+				SharedPreferences sp = context.getSharedPreferences(
+						"localSave", context.MODE_WORLD_READABLE);
 
 				User user = new User();
 				user.setName(sp.getString("name", ""));
-				new ApiClientImpl(context()).getMyList(user);
+				new ApiClientImpl(context).getUserAppointments(user);
 			} else {
-				MessageUtil.shortMessage(context(), "删除成功");
+				MessageUtil.shortMessage(context, "删除成功");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -193,7 +194,7 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doGetLabList(String jsonString) {
+	public void doGetAllLabs(String jsonString) {
 		try {
 			JSONArray jsons = new JSONArray(jsonString);
 			Message msg = new Message();
@@ -210,7 +211,7 @@ public class ResponseHandler {
 	 * 
 	 * @param jsonString
 	 */
-	public static void doGetAppoListByLab_no(String jsonString) {
+	public void doGetLabAppointments(String jsonString) {
 		try {
 			JSONArray jsons = new JSONArray(jsonString);
 			Message msg = new Message();

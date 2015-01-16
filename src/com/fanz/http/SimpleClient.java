@@ -3,6 +3,8 @@ package com.fanz.http;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
+
 /**
  * 网络访问客户端封装
  * 
@@ -12,12 +14,20 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class SimpleClient {
 	private HttpClient client;
 	private SimpleRequest request;
+
+	// 当前需要访问服务器的Activity
+	private Context context;
 	private int tag;
 
-	public SimpleClient(SimpleRequest request, int tag) {
+	public SimpleClient(Context context, SimpleRequest request, int tag) {
 		client = new DefaultHttpClient();
 		this.request = request;
 		this.tag = tag;
+		this.context = context;
+	}
+
+	public Context getContext() {
+		return this.context;
 	}
 
 	/**

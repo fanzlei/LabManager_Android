@@ -137,7 +137,7 @@ public class MyListFragment extends Fragment {
 		SharedPreferences sp = activity.getSharedPreferences("localSave",
 				activity.MODE_WORLD_READABLE);
 		user.setName(sp.getString("name", ""));
-		ApiClientFactory.createApiClient(activity).getMyList(user);
+		ApiClientFactory.createApiClient(activity).getUserAppointments(user);
 		// 我的预约列表中列表项用户点击事件监听
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -163,7 +163,7 @@ public class MyListFragment extends Fragment {
 										appo.setId((int) map.get("id"));
 										deletedId = (int) map.get("id");
 										new ApiClientImpl(activity)
-												.deleteAppo(appo);
+												.deleteAppointment(appo);
 									}
 								}).show();
 

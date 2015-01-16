@@ -82,7 +82,7 @@ public class AppointmentActivity extends BaseActivity {
 			appo.setName(tvAppointName.getText().toString());
 			appo.setDate(new Date(datepicker.getYear() - 1900, datepicker
 					.getMonth(), datepicker.getDayOfMonth()));
-			App.apiClient(this).addAppo(appo);
+			App.apiClient(this).addAppointment(appo);
 		} else {
 			MessageUtil.shortMessage(this, "您的账号尚未被审核通过，请联系管理员");
 		}

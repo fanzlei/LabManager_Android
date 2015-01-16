@@ -60,34 +60,37 @@ public class SimpleAsyncTask extends AsyncTask<Object, java.lang.Void, Object> {
 	 */
 	protected void dispachResponse(String result) {
 		if (tag > 0) {
+			ResponseHandler responseHandler = new ResponseHandler(
+					simpleClient.getContext());
+
 			// 用tag标签区分不同的网络操作，对返回结果进行不同处理
 			switch (tag) {
 			case Tag.LOGIN:
-				ResponseHandler.doLogin(result);
+				responseHandler.doLogin(result);
 				break;
 			case Tag.REGISTER:
-				ResponseHandler.doRegister(result);
+				responseHandler.doRegister(result);
 				break;
 			case Tag.UPDATE_USER:
-				ResponseHandler.doUpdateUser(result);
+				responseHandler.doUpdateUser(result);
 				break;
 			case Tag.GET_MY_LIST:
-				ResponseHandler.doGetMyList(result);
+				responseHandler.doGetUserAppointments(result);
 				break;
 			case Tag.GET_TEACHER_BY_NO:
-				ResponseHandler.doGetTeacherByLab_no(result);
+				responseHandler.doGetLabTeacher(result);
 				break;
 			case Tag.ADD_APPOINTMENT:
-				ResponseHandler.doAddAppointment(result);
+				responseHandler.doAddAppointment(result);
 				break;
 			case Tag.REMOVE_APPOINTMENT:
-				ResponseHandler.doDeleteAppointment(result);
+				responseHandler.doDeleteAppointment(result);
 				break;
 			case Tag.GET_LAB_LIST:
-				ResponseHandler.doGetLabList(result);
+				responseHandler.doGetAllLabs(result);
 				break;
 			case Tag.GET_LAB_APPOINTMENT_LIST:
-				ResponseHandler.doGetAppoListByLab_no(result);
+				responseHandler.doGetLabAppointments(result);
 				break;
 			}
 		}

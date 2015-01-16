@@ -19,10 +19,19 @@ import android.content.Context;
  * @version 1.0 2015.01.15
  */
 public class ApiClientImpl implements ApiClient {
-	public static Context context;
+	private Context context;
 
 	public ApiClientImpl(Context context) {
 		this.context = context;
+	}
+
+	/**
+	 * 发送post请求到服务器
+	 */
+	private void postRequest(SimpleRequestParam params, int tag) {
+		SimpleRequest request = new SimpleRequest(params);
+
+		new SimpleClient(this.context, request, tag).executePost();
 	}
 
 	/** 用户登录实现 */
@@ -32,7 +41,8 @@ public class ApiClientImpl implements ApiClient {
 		params.add("tag", "login");
 		params.add("name", user.getName());
 		params.add("pass", user.getPass());
-		new SimpleClient(new SimpleRequest(params), Tag.LOGIN).executePost();
+
+		postRequest(params, Tag.LOGIN);
 	}
 
 	/** 注册用户 */
@@ -45,7 +55,7 @@ public class ApiClientImpl implements ApiClient {
 		params.add("phone", user.getPhone());
 		params.add("classes", user.getClasses());
 
-		new SimpleClient(new SimpleRequest(params), Tag.REGISTER).executePost();
+		postRequest(params, Tag.REGISTER);
 	}
 
 	/** 修改用户密码 */
@@ -57,35 +67,32 @@ public class ApiClientImpl implements ApiClient {
 		params.add("pass", user.getPass());
 		params.add("phone", user.getPhone());
 
-		new SimpleClient(new SimpleRequest(params), Tag.UPDATE_USER)
-				.executePost();
+		postRequest(params, Tag.UPDATE_USER);
 	}
 
 	/** 获取我的预约列表 */
 	@Override
-	public void getMyList(User user) {
+	public void getUserAppointments(User user) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getMyList");
 		params.add("name", user.getName());
 
-		new SimpleClient(new SimpleRequest(params), Tag.GET_MY_LIST)
-				.executePost();
+		postRequest(params, Tag.GET_MY_LIST);
 	}
 
 	/** 通过实验室编号获取该实验室的管理员 */
 	@Override
-	public void getTeacherByLab_no(Lab lab) {
+	public void getLabTeacher(Lab lab) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getTeacherByLab_no");
 		params.add("lab_no", String.valueOf(lab.getLab_no()));
 
-		new SimpleClient(new SimpleRequest(params), Tag.GET_TEACHER_BY_NO)
-				.executePost();
+		postRequest(params, Tag.GET_TEACHER_BY_NO);
 	}
 
 	/** 添加预约 */
 	@Override
-	public void addAppo(Appointment appo) {
+	public void addAppointment(Appointment appo) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "add");
 		params.add("name", appo.getName());
@@ -94,40 +101,36 @@ public class ApiClientImpl implements ApiClient {
 		params.add("lab_no", String.valueOf(appo.getLab_no()));
 		params.add("number", String.valueOf(appo.getNumber()));
 
-		new SimpleClient(new SimpleRequest(params), Tag.ADD_APPOINTMENT)
-				.executePost();
+		postRequest(params, Tag.ADD_APPOINTMENT);
 	}
 
 	/** 删除预约 */
 	@Override
-	public void deleteAppo(Appointment appo) {
+	public void deleteAppointment(Appointment appo) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "delete");
 		params.add("id", String.valueOf(appo.getId()));
 
-		new SimpleClient(new SimpleRequest(params), Tag.REMOVE_APPOINTMENT)
-				.executePost();
+		postRequest(params, Tag.REMOVE_APPOINTMENT);
 	}
 
 	/** 获取实验室列表 */
 	@Override
-	public void getLabList() {
+	public void getAllLabs() {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getLabList");
 
-		new SimpleClient(new SimpleRequest(params), Tag.GET_LAB_LIST)
-				.executePost();
+		postRequest(params, Tag.GET_LAB_LIST);
 	}
 
 	/** 通过实验室编号获取该实验的预约列表 */
 	@Override
-	public void getAppoListByLab_no(Lab lab) {
+	public void getLabAppointments(Lab lab) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getAppoListByLab_no");
 		params.add("lab_no", String.valueOf(lab.getLab_no()));
 
-		new SimpleClient(new SimpleRequest(params),
-				Tag.GET_LAB_APPOINTMENT_LIST).executePost();
+		postRequest(params, Tag.GET_LAB_APPOINTMENT_LIST);
 	}
 
 }

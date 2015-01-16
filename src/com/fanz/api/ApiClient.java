@@ -21,20 +21,20 @@ public interface ApiClient {
 	void updateUser(User user);
 
 	/** 获取用户预约列表 */
-	void getMyList(User user);
+	void getUserAppointments(User user);
 
 	/** 获取实验室的管理教师信息 */
-	void getTeacherByLab_no(Lab lab);
+	void getLabTeacher(Lab lab);
 
 	/** 预约实验室 */
-	void addAppo(Appointment appo);
+	void addAppointment(Appointment appointment);
 	
 	/** 取消某个预约 */
-	void deleteAppo(Appointment appo);
+	void deleteAppointment(Appointment appointment);
 
 	/** 获取实验室列表 */
-	void getLabList();
+	void getAllLabs();
 
 	/** 获取某个实验室的预约列表 */
-	void getAppoListByLab_no(Lab lab);
+	void getLabAppointments(Lab lab);
 }

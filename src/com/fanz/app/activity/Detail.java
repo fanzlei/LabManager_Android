@@ -69,8 +69,8 @@ public class Detail extends BaseActivity {
 		Tname.setText(name);
 		listView = (ListView) this.findViewById(R.id.detail_list);
 		
-		App.apiClient(this).getAppoListByLab_no(lab);
-		App.apiClient(this).getTeacherByLab_no(lab);
+		App.apiClient(this).getLabAppointments(lab);
+		App.apiClient(this).getLabTeacher(lab);
 	}
 
 	/** 设置显示实验室管理教师信息 */
