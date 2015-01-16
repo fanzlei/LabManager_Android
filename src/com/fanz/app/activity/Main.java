@@ -1,37 +1,30 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import com.fanz.app.R;
+import com.fanz.app.base.BaseActivity;
 import com.fanz.util.MessageUtil;
 import com.fanz.widget.fragment.ListFragment;
 import com.fanz.widget.fragment.MyListFragment;
 import com.fanz.widget.fragment.SettingFragment;
-import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Fragment;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
- * 软件主页面
+ * 程序主界面 包含三个fragment 分别为实验室列表、我的预约列表、设置
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class Main extends BaseActivity {
 
-	boolean prepareExit = false;
-	Fragment listFragment, myListFragment, settingFragment;
-	ListView listView;
+	private boolean prepareExit = false;
+	private Fragment listFragment, myListFragment, settingFragment;
+	private ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +41,17 @@ public class Main extends BaseActivity {
 
 	}
 
+	/** 显示实验室列表的fragment */
 	public void showList(View v) {
 		showFragment(v, listFragment);
 	}
 
+	/** 显示我的预约列表的fragment */
 	public void showMyList(View v) {
 		showFragment(v, myListFragment);
 	}
 
+	/** 显示设置的fragment */
 	public void showConfiguration(View v) {
 		showFragment(v, settingFragment);
 	}
@@ -65,7 +61,7 @@ public class Main extends BaseActivity {
 				.replace(R.id.container, fragment).commit();
 	}
 
-	// 双击提示退出应用
+	/** 监听用户按键，实现提示双击退出应用效果 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {

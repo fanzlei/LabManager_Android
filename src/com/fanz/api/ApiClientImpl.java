@@ -16,7 +16,7 @@ import android.content.Context;
  * 负责android客户端与服务器之间的交互
  * 
  * @author fanz
- * 
+ * @version 1.0 2015.01.15
  */
 public class ApiClientImpl implements ApiClient {
 	public static Context context;

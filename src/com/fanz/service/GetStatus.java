@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.app.R;
-import com.fanz.app.Main;
+import com.fanz.app.activity.Main;
 import com.fanz.model.User;
 import android.app.AlarmManager;
 import android.app.Notification;

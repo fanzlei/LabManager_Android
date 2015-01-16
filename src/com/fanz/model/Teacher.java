@@ -4,11 +4,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 教师模型
+ * 教师信息
  * 
- * @author fanz
- *
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class Teacher {
 
 	private int id = -1;

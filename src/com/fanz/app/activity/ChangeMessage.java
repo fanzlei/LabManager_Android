@@ -1,22 +1,22 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import com.fanz.app.R;
-import com.fanz.api.ApiClientImpl;
+import com.fanz.app.base.App;
+import com.fanz.app.base.BaseActivity;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.model.User;
-import android.app.Activity;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * 修改用户个人信息页面
+ * 修改用户信息界面，用于修改用户密码和手机号
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class ChangeMessage extends BaseActivity {
 
@@ -36,23 +36,30 @@ public class ChangeMessage extends BaseActivity {
 
 	}
 
+	/** 点击确定按钮，根据用户输入情况进行信息修改操作 */
 	public void change(View v) {
 		String op = oldPass.getText().toString().trim();
 		String np = newPass.getText().toString().trim();
 		String nph = newPhone.getText().toString().trim();
 		if (op != null && op != "") {
+			// 输入当前密码不为空
 			if (op.equals(sp.getString("pass", ""))) {
+				// 当前密码输入正确
 				if (np != null && np != "") {
+					// 输入新密码不为空
 					User user = new User();
 					user.setName(sp.getString("name", ""));
 					user.setPass(np);
 					user.setPhone(nph);
-					new ApiClientImpl(this).updateUser(user);
+					ApiClientFactory.createApiClient(this).updateUser(user);
 				} else {
+					// 输入新密码为空，此时只修改用户手机号
 					User user = new User();
 					user.setName(sp.getString("name", ""));
 					user.setPass(sp.getString("pass", ""));
 					user.setPhone(nph);
+					
+					// 更新用户
 					App.apiClient(this).updateUser(user);
 				}
 			} else {

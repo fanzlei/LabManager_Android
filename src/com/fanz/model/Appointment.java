@@ -5,11 +5,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 预约模型
+ * 实验室预约信息
  * 
- * @author fanz
- * 
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class Appointment {
 
 	private int id;

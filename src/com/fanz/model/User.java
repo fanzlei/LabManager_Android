@@ -4,12 +4,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 用户模型
+ * 用户信息
  * 
- * @author fanz
- * @since 2014-01-13
- * 
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class User {
 
 	private int id = -1;

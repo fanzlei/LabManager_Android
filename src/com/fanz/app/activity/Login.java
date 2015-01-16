@@ -1,22 +1,20 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import com.fanz.app.R;
-import com.fanz.api.ApiClientFactory;
-import com.fanz.api.ApiClientImpl;
+import com.fanz.app.base.App;
+import com.fanz.app.base.BaseActivity;
 import com.fanz.model.User;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 /**
- * 用户登录页面
+ * 用户登录界面
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class Login extends BaseActivity {
 
@@ -36,6 +34,11 @@ public class Login extends BaseActivity {
 		editPassword = (EditText) findViewById(R.id.login_pass);
 	}
 
+	/**
+	 * 点击登录按钮，根据用户输入信息进行登录操作
+	 * 
+	 * @param v
+	 */
 	public void login(View v) {
 		String username = editUsername.getText().toString().trim();
 		String password = editPassword.getText().toString().trim();
@@ -43,6 +46,11 @@ public class Login extends BaseActivity {
 		App.apiClient(this).login(new User(username, password));
 	}
 
+	/**
+	 * 点击注册按钮，进入用户注册界面
+	 * 
+	 * @param v
+	 */
 	public void register(View v) {
 		Intent intent = new Intent(this, Register.class);
 		this.startActivity(intent);

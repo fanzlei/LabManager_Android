@@ -1,4 +1,4 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.fanz.app.R;
-import com.fanz.api.ApiClientImpl;
+import com.fanz.app.base.App;
+import com.fanz.app.base.BaseActivity;
 import com.fanz.model.Lab;
 
 import android.app.Activity;
@@ -19,24 +20,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 /**
- * 实验室详细信息及预约列表页面
+ * 实验室预约列表显示界面
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class Detail extends BaseActivity {
 
-	static ListView listView;
-	static JSONArray ja;
-	static JSONObject jo;
-	static Activity activity;
+	private static ListView listView;
+	private static JSONArray ja;
+	private static JSONObject jo;
+	private static Activity activity;
+	/** 处理服务器返回信息的Handler */
 	public static Handler handler = new Handler() {
 
 		@Override
@@ -68,10 +68,12 @@ public class Detail extends BaseActivity {
 		TextView Tname = (TextView) this.findViewById(R.id.detail_name);
 		Tname.setText(name);
 		listView = (ListView) this.findViewById(R.id.detail_list);
+		
 		App.apiClient(this).getAppoListByLab_no(lab);
 		App.apiClient(this).getTeacherByLab_no(lab);
 	}
 
+	/** 设置显示实验室管理教师信息 */
 	private static void setTeacherMessage() {
 		// TODO Auto-generated method stub
 		TextView tv = (TextView) activity
@@ -85,6 +87,7 @@ public class Detail extends BaseActivity {
 		}
 	}
 
+	/** 设置实验室预约列表适配器 */
 	private static void setAdapter() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < ja.length(); i++) {
@@ -116,6 +119,7 @@ public class Detail extends BaseActivity {
 		listView.setAdapter(adapter);
 	}
 
+	/** 实验室预约时间段转换为文字形式 */
 	private static String date_partToString(int i) {
 		switch (i) {
 		case 1:
@@ -134,6 +138,7 @@ public class Detail extends BaseActivity {
 
 	}
 
+	/** 点击我要预约按钮，进入实验室预约界面 */
 	public void appointment(View v) {
 		Intent intent = new Intent(this, AppointmentActivity.class);
 		Bundle bundle = this.getIntent().getExtras();
@@ -142,6 +147,7 @@ public class Detail extends BaseActivity {
 
 	}
 
+	/** 点击返回按钮，返回主界面 */
 	public void back(View v) {
 		Intent intent = new Intent(this, Main.class);
 		this.startActivity(intent);

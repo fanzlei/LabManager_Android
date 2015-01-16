@@ -1,10 +1,6 @@
-package com.fanz.app;
-
-import com.fanz.api.ApiClient;
-import com.fanz.api.ApiClientFactory;
+package com.fanz.app.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;

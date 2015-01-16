@@ -1,4 +1,4 @@
-package com.fanz.app;
+package com.fanz.app.base;
 
 import android.content.Context;
 

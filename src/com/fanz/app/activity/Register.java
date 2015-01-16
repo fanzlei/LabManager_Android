@@ -1,27 +1,24 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import com.fanz.app.R;
-import com.fanz.api.ApiClientImpl;
+import com.fanz.app.base.App;
+import com.fanz.app.base.BaseActivity;
 import com.fanz.model.User;
 import com.fanz.util.MessageUtil;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
- * 用户注册页面
+ * 用户注册界面
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class Register extends BaseActivity {
 
-	EditText name, pass, phone, classes;
+	private EditText name, pass, phone, classes;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +32,20 @@ public class Register extends BaseActivity {
 
 	}
 
+	/** 点击注册按钮，根据用户输入信息进行账户注册 */
 	public void register(View v) {
 		if (name.getText().toString().trim().length() > 0
 				&& pass.getText().toString().trim().length() > 0
 				&& phone.getText().toString().trim().length() > 2
 				&& classes.getText().toString().trim().length() > 2) {
+			
 			User user = new User();
 			user.setName(name.getText().toString().trim());
 			user.setPass(pass.getText().toString().trim());
 			user.setPhone(phone.getText().toString().trim());
 			user.setClasses(classes.getText().toString().trim());
+			
+			// 注册用户信息
 			App.apiClient(this).register(user);
 		} else {
 			MessageUtil.shortMessage(Register.this, "请输入正确格式信息");

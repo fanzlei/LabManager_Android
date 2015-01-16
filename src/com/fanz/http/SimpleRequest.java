@@ -5,13 +5,11 @@ import org.apache.http.client.methods.HttpPost;
 import com.fanz.util.Constant;
 
 /**
- * 网络请求封装类
+ * 网络请求封装类 这里只用到了Android端发送POST请求
  * 
- * 暂时这里只用到了Android端发送POST请求
- * 
- * @author fanz
- * 
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class SimpleRequest {
 	private HttpPost post;
 

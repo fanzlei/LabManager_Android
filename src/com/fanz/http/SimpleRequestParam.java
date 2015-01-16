@@ -10,11 +10,10 @@ import org.apache.http.message.BasicNameValuePair;
 import com.fanz.util.Constant;
 
 /**
- * 请求参数封装类
+ * 请求参数封装类 这里Android端只是向服务器发送POST请求
  * 
- * 目前这里Android端只是向服务器发送POST请求
- * 
- * @author fanz
+ * @author Fanz
+ * @version 1.0 2015.01.15
  * */
 public class SimpleRequestParam {
 	// 网络请求的entity

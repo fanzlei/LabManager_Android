@@ -24,15 +24,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.fanz.app.R;
-import com.fanz.api.ApiClientImpl;
-import com.fanz.app.Detail;
+import com.fanz.api.ApiClientFactory;
+import com.fanz.app.activity.Detail;
 
 /**
- * 实验室列表fragment的简单封装
+ * 显示实验室列表的fragment
  * 
- * @author fanz
- * 
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class ListFragment extends Fragment {
 
 	static ListView listView;
@@ -50,6 +50,7 @@ public class ListFragment extends Fragment {
 			}
 		}
 
+		/** 设置显示实验室列表的适配器 */
 		private void setAdapter() {
 
 			SharedPreferences sp = context.getSharedPreferences("localSave",
@@ -102,9 +103,10 @@ public class ListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		context = this.getActivity();
-		new ApiClientImpl(context).getLabList();
+		ApiClientFactory.createApiClient(context).getLabList();
 		listView = (ListView) this.getActivity().findViewById(
 				R.id.list_fragment_list);
+		//实验室列表列表项用户点击事件监听
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,

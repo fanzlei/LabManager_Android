@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Appointment;
 import com.fanz.model.User;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -28,22 +32,21 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 /**
- * 用户预约列表fragment的简单封装
+ * 显示我的预约列表的fragment
  * 
- * @author fanz
- * 
- */
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class MyListFragment extends Fragment {
 
-	static ListView listView;
-	static JSONArray ja;
-	static Activity activity;
-	static int deletedId = -1;
+	private static ListView listView;
+	private static JSONArray ja;
+	private static Activity activity;
+	private static int deletedId = -1;
 	public static Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 111) {
 				ja = (JSONArray) msg.obj;
@@ -54,6 +57,7 @@ public class MyListFragment extends Fragment {
 
 	};
 
+	/** 设置显示我的预约列表的适配器 */
 	public static void setAdapter() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		SharedPreferences sp = activity.getSharedPreferences("localSave",
@@ -92,12 +96,14 @@ public class MyListFragment extends Fragment {
 		listView.setAdapter(adapter);
 	}
 
+	/** 把实验室编号转换为实验室名称，用于我的预约列表中显示 */
 	private static String lab_noToLab_name(int i) {
 		SharedPreferences sp = activity.getSharedPreferences("localSave",
 				activity.MODE_WORLD_READABLE);
 		return sp.getString(String.valueOf(i), "error");
 	}
 
+	/** 实验室预约时段转换为字符串 */
 	private static String date_partToString(int i) {
 		switch (i) {
 		case 1:
@@ -131,7 +137,8 @@ public class MyListFragment extends Fragment {
 		SharedPreferences sp = activity.getSharedPreferences("localSave",
 				activity.MODE_WORLD_READABLE);
 		user.setName(sp.getString("name", ""));
-		new ApiClientImpl(activity).getMyList(user);
+		ApiClientFactory.createApiClient(activity).getMyList(user);
+		// 我的预约列表中列表项用户点击事件监听
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

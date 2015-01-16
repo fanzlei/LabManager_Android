@@ -1,17 +1,15 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import com.fanz.app.R;
+import com.fanz.app.base.BaseActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
 /**
- * 软件信息显示页面
+ * 软件信息和作者信息显示界面
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class About extends BaseActivity {
 

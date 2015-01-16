@@ -1,22 +1,21 @@
-package com.fanz.app;
+package com.fanz.app.activity;
 
 import com.fanz.app.R;
+import com.fanz.app.base.BaseActivity;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 /**
- * 软件打开是的splash页面
+ * 打开应用的Splash界面 显示一张logo的透明度渐变效果
  * 
- * @author Fanz
- * 
+ * @author fanz
+ * @version 1.0 2015.01.15
  */
 public class Logo extends BaseActivity {
 
