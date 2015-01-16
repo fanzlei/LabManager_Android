@@ -12,6 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+/**
+ * 用户登录页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class Login extends BaseActivity {
 
 	EditText editUsername;

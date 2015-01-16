@@ -12,6 +12,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 修改用户个人信息页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class ChangeMessage extends BaseActivity {
 
 	EditText oldPass, newPass, newPhone;
@@ -20,7 +26,7 @@ public class ChangeMessage extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		this.setContentView(R.layout.change_message);
 		oldPass = (EditText) findViewById(R.id.oldPassword);
 		newPass = (EditText) this.findViewById(R.id.newPassword);
@@ -47,7 +53,7 @@ public class ChangeMessage extends BaseActivity {
 					user.setName(sp.getString("name", ""));
 					user.setPass(sp.getString("pass", ""));
 					user.setPhone(nph);
-					new ApiClientImpl(this).updateUser(user);
+					App.apiClient(this).updateUser(user);
 				}
 			} else {
 				Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();

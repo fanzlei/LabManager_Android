@@ -12,6 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+/**
+ * 软件打开是的splash页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class Logo extends BaseActivity {
 
 	@Override

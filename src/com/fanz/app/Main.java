@@ -21,6 +21,12 @@ import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 软件主页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class Main extends BaseActivity {
 
 	boolean prepareExit = false;
@@ -40,8 +46,6 @@ public class Main extends BaseActivity {
 		this.getFragmentManager().beginTransaction()
 				.replace(R.id.container, listFragment).commit();
 
-		// 启动service，定时获取预定是否被通过
-		// setAlarm();
 	}
 
 	public void showList(View v) {
@@ -61,6 +65,7 @@ public class Main extends BaseActivity {
 				.replace(R.id.container, fragment).commit();
 	}
 
+	// 双击提示退出应用
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -81,20 +86,4 @@ public class Main extends BaseActivity {
 		return true;
 	}
 
-	private void setAlarm() {
-		// 创建定时器，没15分钟执行一次本service
-		AlarmManager alarm = (AlarmManager) this
-				.getSystemService(Service.ALARM_SERVICE);
-		Intent in = new Intent();
-		in.setAction("com.service.getPassStatus");
-		PendingIntent pi = PendingIntent.getService(this, 0, in, 0);
-		alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, 60, 60, pi);
-		/*
-		 * timer=new Timer(); timer.schedule(new TimerTask(){
-		 * 
-		 * @Override public void run() { // TODO Auto-generated method stub
-		 * GetStatus.this.startService(new Intent("com.service.getPassStatus"));
-		 * }}, 20000,20000);
-		 */
-	}
 }

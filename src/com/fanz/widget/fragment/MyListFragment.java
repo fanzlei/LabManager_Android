@@ -27,6 +27,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+/**
+ * 用户预约列表fragment的简单封装
+ * 
+ * @author fanz
+ * 
+ */
 public class MyListFragment extends Fragment {
 
 	static ListView listView;

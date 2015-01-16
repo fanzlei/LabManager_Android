@@ -30,7 +30,7 @@
             android:launchMode="singleTask" />
         <activity android:name="com.fanz.app.Detail" />
         <activity android:name="com.fanz.app.Register" />
-        <activity android:name="com.fanz.app.Appointment" />
+        <activity android:name="com.fanz.app.AppointmentActivity" />
         <activity android:name="com.fanz.app.About" />
         <activity android:name="com.fanz.app.ChangeMessage" />
 

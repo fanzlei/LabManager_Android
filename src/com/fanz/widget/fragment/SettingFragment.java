@@ -11,6 +11,12 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 
+/**
+ * 设置fragment的简单封装
+ * 
+ * @author fanz
+ * 
+ */
 public class SettingFragment extends PreferenceFragment {
 
 	Context context;
@@ -26,13 +32,13 @@ public class SettingFragment extends PreferenceFragment {
 		context = this.getActivity();
 		SharedPreferences sp = context.getSharedPreferences("localSave",
 				context.MODE_WORLD_READABLE);
-		
+
 		Preference pp = this.findPreference("acount");
 
 		String summary = sp.getString("classes", "") + '\t';
 		summary += sp.getString("phone", "") + '\t';
-		summary += sp.getBoolean("pass_status", false) == true ? "已通过" : "未通过");
-			
+		summary += sp.getBoolean("pass_status", false) == true ? "已通过" : "未通过";
+
 		pp.setTitle(sp.getString("name", ""));
 		pp.setSummary(summary);
 
@@ -46,7 +52,7 @@ public class SettingFragment extends PreferenceFragment {
 						return true;
 					}
 				});
-		
+
 		this.findPreference("about").setOnPreferenceClickListener(
 				new OnPreferenceClickListener() {
 

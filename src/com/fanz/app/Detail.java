@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fanz.app.R;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Lab;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +25,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+/**
+ * 实验室详细信息及预约列表页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class Detail extends BaseActivity {
 
 	static ListView listView;
@@ -48,7 +57,7 @@ public class Detail extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_detail);
 		activity = this;
 		Bundle bundle = this.getIntent().getExtras();
@@ -59,8 +68,8 @@ public class Detail extends BaseActivity {
 		TextView Tname = (TextView) this.findViewById(R.id.detail_name);
 		Tname.setText(name);
 		listView = (ListView) this.findViewById(R.id.detail_list);
-		new ApiClientImpl(this).getAppoListByLab_no(lab);
-		new ApiClientImpl(this).getTeacherByLab_no(lab);
+		App.apiClient(this).getAppoListByLab_no(lab);
+		App.apiClient(this).getTeacherByLab_no(lab);
 	}
 
 	private static void setTeacherMessage() {

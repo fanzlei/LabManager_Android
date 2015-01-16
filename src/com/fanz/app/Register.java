@@ -13,6 +13,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 用户注册页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class Register extends BaseActivity {
 
 	EditText name, pass, phone, classes;
@@ -39,8 +45,7 @@ public class Register extends BaseActivity {
 			user.setPass(pass.getText().toString().trim());
 			user.setPhone(phone.getText().toString().trim());
 			user.setClasses(classes.getText().toString().trim());
-			
-			new ApiClientImpl(this).register(user);
+			App.apiClient(this).register(user);
 		} else {
 			MessageUtil.shortMessage(Register.this, "请输入正确格式信息");
 		}

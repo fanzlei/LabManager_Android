@@ -44,7 +44,7 @@ public class ApiClientImpl implements ApiClient {
 		params.add("pass", user.getPass());
 		params.add("phone", user.getPhone());
 		params.add("classes", user.getClasses());
-		
+
 		new SimpleClient(new SimpleRequest(params), Tag.REGISTER).executePost();
 	}
 
@@ -56,8 +56,9 @@ public class ApiClientImpl implements ApiClient {
 		params.add("name", user.getName());
 		params.add("pass", user.getPass());
 		params.add("phone", user.getPhone());
-		
-		new SimpleClient(new SimpleRequest(params), Tag.UPDATE_USER).executePost();
+
+		new SimpleClient(new SimpleRequest(params), Tag.UPDATE_USER)
+				.executePost();
 	}
 
 	/** 获取我的预约列表 */
@@ -66,8 +67,9 @@ public class ApiClientImpl implements ApiClient {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getMyList");
 		params.add("name", user.getName());
-		
-		new SimpleClient(new SimpleRequest(params), Tag.GET_MY_LIST).executePost();
+
+		new SimpleClient(new SimpleRequest(params), Tag.GET_MY_LIST)
+				.executePost();
 	}
 
 	/** 通过实验室编号获取该实验室的管理员 */
@@ -75,9 +77,10 @@ public class ApiClientImpl implements ApiClient {
 	public void getTeacherByLab_no(Lab lab) {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getTeacherByLab_no");
-		params.add("name", String.valueOf(lab.getLab_no()));
-		
-		new SimpleClient(new SimpleRequest(params), Tag.GET_TEACHER_BY_NO).executePost();
+		params.add("lab_no", String.valueOf(lab.getLab_no()));
+
+		new SimpleClient(new SimpleRequest(params), Tag.GET_TEACHER_BY_NO)
+				.executePost();
 	}
 
 	/** 添加预约 */
@@ -90,8 +93,9 @@ public class ApiClientImpl implements ApiClient {
 		params.add("date_part", String.valueOf(appo.getDate_part()));
 		params.add("lab_no", String.valueOf(appo.getLab_no()));
 		params.add("number", String.valueOf(appo.getNumber()));
-		
-		new SimpleClient(new SimpleRequest(params), Tag.ADD_APPOINTMENT).executePost();
+
+		new SimpleClient(new SimpleRequest(params), Tag.ADD_APPOINTMENT)
+				.executePost();
 	}
 
 	/** 删除预约 */
@@ -100,8 +104,9 @@ public class ApiClientImpl implements ApiClient {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "delete");
 		params.add("id", String.valueOf(appo.getId()));
-		
-		new SimpleClient(new SimpleRequest(params), Tag.REMOVE_APPOINTMENT).executePost();
+
+		new SimpleClient(new SimpleRequest(params), Tag.REMOVE_APPOINTMENT)
+				.executePost();
 	}
 
 	/** 获取实验室列表 */
@@ -109,8 +114,9 @@ public class ApiClientImpl implements ApiClient {
 	public void getLabList() {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getLabList");
-		
-		new SimpleClient(new SimpleRequest(params), Tag.GET_LAB_LIST).executePost();
+
+		new SimpleClient(new SimpleRequest(params), Tag.GET_LAB_LIST)
+				.executePost();
 	}
 
 	/** 通过实验室编号获取该实验的预约列表 */
@@ -119,8 +125,9 @@ public class ApiClientImpl implements ApiClient {
 		SimpleRequestParam params = new SimpleRequestParam();
 		params.add("tag", "getAppoListByLab_no");
 		params.add("lab_no", String.valueOf(lab.getLab_no()));
-		
-		new SimpleClient(new SimpleRequest(params), Tag.GET_LAB_APPOINTMENT_LIST).executePost();
+
+		new SimpleClient(new SimpleRequest(params),
+				Tag.GET_LAB_APPOINTMENT_LIST).executePost();
 	}
 
 }

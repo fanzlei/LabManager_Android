@@ -13,19 +13,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fanz.app.R;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.app.Detail;
 
 /**
- * 列表fragment的简单封装
+ * 实验室列表fragment的简单封装
  * 
  * @author fanz
  * 
@@ -114,6 +117,8 @@ public class ListFragment extends Fragment {
 
 					Intent intent = new Intent(context, Detail.class);
 					intent.putExtra("lab_no", json.getInt("lab_no"));
+					System.out.println("Fragment中lab_no="
+							+ json.getInt("lab_no"));
 					intent.putExtra("name", json.getString("name"));
 					context.startActivity(intent);
 				} catch (JSONException e) {

@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * 实现全屏显示
+ * 
+ * @author Fanz
+ * 
+ */
 public class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +24,5 @@ public class BaseActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	}
-	
+
 }

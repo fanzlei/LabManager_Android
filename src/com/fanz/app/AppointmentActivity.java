@@ -3,6 +3,7 @@ package com.fanz.app;
 import java.sql.Date;
 
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Appointment;
 import com.fanz.util.MessageUtil;
@@ -19,6 +20,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 实验室预约操作页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class AppointmentActivity extends BaseActivity {
 
 	TextView tvLabName, tvAppointPhone, tvAppointName;
@@ -78,7 +85,6 @@ public class AppointmentActivity extends BaseActivity {
 			appo.setName(tvAppointName.getText().toString());
 			appo.setDate(new Date(datepicker.getYear() - 1900, datepicker
 					.getMonth(), datepicker.getDayOfMonth()));
-
 			App.apiClient(this).addAppo(appo);
 		} else {
 			MessageUtil.shortMessage(this, "您的账号尚未被审核通过，请联系管理员");

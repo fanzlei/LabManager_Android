@@ -41,7 +41,8 @@ public class SimpleRequestParam {
 
 	public UrlEncodedFormEntity getEntity() {
 		try {
-			urlEncodedFormEntity = new UrlEncodedFormEntity(list, Constant.CHARSET);
+			urlEncodedFormEntity = new UrlEncodedFormEntity(list,
+					Constant.CHARSET);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

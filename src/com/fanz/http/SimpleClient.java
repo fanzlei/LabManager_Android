@@ -13,7 +13,7 @@ public class SimpleClient {
 		this.request = request;
 		this.tag = tag;
 	}
-	
+
 	/**
 	 * 使用异步任务执行post请求
 	 */

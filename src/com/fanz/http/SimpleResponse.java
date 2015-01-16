@@ -29,8 +29,8 @@ public class SimpleResponse {
 	public JSONObject getJSONObject() {
 		JSONObject json = null;
 		try {
-			String str = StringUtil
-					.parseString(response.getEntity().getContent());
+			String str = StringUtil.parseString(response.getEntity()
+					.getContent());
 			json = new JSONObject(str);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,11 +44,11 @@ public class SimpleResponse {
 	 * @return JSONArray结果
 	 * */
 	public JSONArray getJSONArray() {
-		JSONArray ja = null;
+		JSONArray jsons = null;
 		try {
-			String str = StringUtil
-					.parseString(response.getEntity().getContent());
-			ja = new JSONArray(str);
+			String str = StringUtil.parseString(response.getEntity()
+					.getContent());
+			jsons = new JSONArray(str);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -56,7 +56,7 @@ public class SimpleResponse {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return ja;
+		return jsons;
 	}
 
 }

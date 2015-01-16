@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * 软件信息显示页面
+ * 
+ * @author Fanz
+ * 
+ */
 public class About extends BaseActivity {
 
 	@Override

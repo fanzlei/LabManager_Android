@@ -188,6 +188,11 @@ public class ResponseHandler {
 		}
 	}
 
+	/**
+	 * 获取实验室列表
+	 * 
+	 * @param jsonString
+	 */
 	public static void doGetLabList(String jsonString) {
 		try {
 			JSONArray jsons = new JSONArray(jsonString);
@@ -200,6 +205,11 @@ public class ResponseHandler {
 		}
 	}
 
+	/**
+	 * 通过实验室获取该实验室预约列表
+	 * 
+	 * @param jsonString
+	 */
 	public static void doGetAppoListByLab_no(String jsonString) {
 		try {
 			JSONArray jsons = new JSONArray(jsonString);
