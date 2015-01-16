@@ -6,69 +6,62 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.fanz.util.NetUtils;
+import com.fanz.util.StringUtil;
 
 /**
  * 网络响应封装类
  * 
+<<<<<<< HEAD
  * @author Fanz
  * @version 1.0 2015.01.15
+=======
+ * @author fanz
+>>>>>>> FETCH_HEAD
  * */
 public class SimpleResponse {
 
 	private HttpResponse response;
 
 	public SimpleResponse(final HttpResponse response) {
-		// TODO Auto-generated constructor stub
 		this.response = response;
 	}
 
 	/**
-	 * @return 返回从响应中获取的JSONObject对象
+	 * 返回从响应中获取的JSONObject对象
+	 * 
+	 * @return JSON结果
 	 **/
 	public JSONObject getJSONObject() {
-		JSONObject jo = null;
+		JSONObject json = null;
 		try {
-			String str = NetUtils.getFromInputStream(response.getEntity()
-					.getContent());
-			jo = new JSONObject(str);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			String str = StringUtil
+					.parseString(response.getEntity().getContent());
+			json = new JSONObject(str);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return jo;
+		return json;
 	}
 
 	/**
-	 * @return 返回从响应中获取的JSONArray对象
+	 * 返回从响应中获取的JSONArray对象
+	 * 
+	 * @return JSONArray结果
 	 * */
 	public JSONArray getJSONArray() {
 		JSONArray ja = null;
 		try {
-			String str = NetUtils.getFromInputStream(response.getEntity()
-					.getContent());
+			String str = StringUtil
+					.parseString(response.getEntity().getContent());
 			ja = new JSONArray(str);
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ja;
 	}
 
-	public String toString() {
-
-		return "";
-	}
 }

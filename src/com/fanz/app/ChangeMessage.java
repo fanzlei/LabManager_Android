@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 /**
  * 修改用户信息界面，用于修改用户密码和手机号
  * 
@@ -21,17 +22,17 @@ import android.widget.Toast;
  * @version 1.0 2015.01.15
  */
 public class ChangeMessage extends Activity {
+=======
+public class ChangeMessage extends BaseActivity {
+>>>>>>> FETCH_HEAD
 
 	EditText oldPass, newPass, newPhone;
 	SharedPreferences sp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		this.setContentView(R.layout.change_message);
 		oldPass = (EditText) findViewById(R.id.oldPassword);
 		newPass = (EditText) this.findViewById(R.id.newPassword);

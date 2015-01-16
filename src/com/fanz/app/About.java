@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+<<<<<<< HEAD
 /**
  * 软件信息和作者信息显示界面
  * 
@@ -14,14 +15,14 @@ import android.view.WindowManager;
  * @version 1.0 2015.01.15
  */
 public class About extends Activity {
+=======
+public class About extends BaseActivity {
+>>>>>>> FETCH_HEAD
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		this.setContentView(R.layout.about);
 	}
 

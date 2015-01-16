@@ -21,12 +21,17 @@ public class User {
 	public User() {
 	}
 
-	public User(JSONObject jo) throws JSONException {
-		name = jo.getString("name");
-		pass = jo.getString("pass");
-		phone = jo.getString("phone");
-		passStatus = jo.getBoolean("pass_status");
-		classes = jo.getString("classes");
+	public User(JSONObject json) throws JSONException {
+		name = json.getString("name");
+		pass = json.getString("pass");
+		phone = json.getString("phone");
+		passStatus = json.getBoolean("pass_status");
+		classes = json.getString("classes");
+	}
+
+	public User(String username, String password) {
+		this.name = username;
+		this.pass = password;
 	}
 
 	public int getId() {

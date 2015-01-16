@@ -2,12 +2,22 @@ package com.fanz.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+<<<<<<< HEAD
 /**
  * 实验室信息
  * 
  * @author Fanz
  * @version 1.0 2015.01.15
  * */
+=======
+
+/**
+ * 实验室模型
+ * 
+ * @author fanz
+ *
+ */
+>>>>>>> FETCH_HEAD
 public class Lab {
 
 	private int id;
@@ -20,11 +30,11 @@ public class Lab {
 	public Lab() {
 	}
 
-	public Lab(JSONObject jo) throws JSONException {
-		name = jo.getString("name");
-		pass = jo.getString("pass");
-		lab_no = jo.getInt("lab_no");
-		describe = jo.getString("describe");
+	public Lab(JSONObject json) throws JSONException {
+		name = json.getString("name");
+		pass = json.getString("pass");
+		lab_no = json.getInt("lab_no");
+		describe = json.getString("describe");
 	}
 
 	public int getId() {

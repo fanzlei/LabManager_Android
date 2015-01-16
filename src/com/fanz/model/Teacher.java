@@ -4,11 +4,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+<<<<<<< HEAD
  * 教师信息
  * 
  * @author Fanz
  * @version 1.0 2015.01.15
  * */
+=======
+ * 教师模型
+ * 
+ * @author fanz
+ *
+ */
+>>>>>>> FETCH_HEAD
 public class Teacher {
 
 	private int id = -1;
@@ -22,11 +30,11 @@ public class Teacher {
 
 	}
 
-	public Teacher(JSONObject jo) throws JSONException {
-		name = jo.getString("name");
-		pass = jo.getString("pass");
-		lab_no = jo.getInt("lab_no");
-		phone = jo.getString("phone");
+	public Teacher(JSONObject json) throws JSONException {
+		name = json.getString("name");
+		pass = json.getString("pass");
+		lab_no = json.getInt("lab_no");
+		phone = json.getString("phone");
 	}
 
 	public int getId() {

@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+<<<<<<< HEAD
 /**
  * 打开应用的Splash界面 显示一张logo的透明度渐变效果
  * 
@@ -19,14 +20,14 @@ import android.widget.ImageView;
  * @version 1.0 2015.01.15
  */
 public class Logo extends Activity {
+=======
+public class Logo extends BaseActivity {
+>>>>>>> FETCH_HEAD
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.logo);
 		final ImageView iv = (ImageView) findViewById(R.id.logo_imageView);
 		ValueAnimator anim = new ValueAnimator();

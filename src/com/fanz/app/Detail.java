@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 /**
  * 实验室预约列表显示界面
  * 
@@ -33,6 +34,9 @@ import android.widget.TextView;
  * @version 1.0 2015.01.15
  */
 public class Detail extends Activity {
+=======
+public class Detail extends BaseActivity {
+>>>>>>> FETCH_HEAD
 
 	private static ListView listView;
 	private static JSONArray ja;
@@ -43,7 +47,6 @@ public class Detail extends Activity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 333) {
 				ja = (JSONArray) msg.obj;
@@ -60,9 +63,7 @@ public class Detail extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.activity_detail);
 		activity = this;
 		Bundle bundle = this.getIntent().getExtras();
@@ -144,7 +145,7 @@ public class Detail extends Activity {
 
 	/** 点击我要预约按钮，进入实验室预约界面 */
 	public void appointment(View v) {
-		Intent intent = new Intent(this, Appointment.class);
+		Intent intent = new Intent(this, AppointmentActivity.class);
 		Bundle bundle = this.getIntent().getExtras();
 		intent.putExtras(bundle);
 		this.startActivity(intent);

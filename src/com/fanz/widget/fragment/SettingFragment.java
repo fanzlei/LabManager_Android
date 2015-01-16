@@ -22,39 +22,42 @@ public class SettingFragment extends PreferenceFragment {
 	private Context context;
 
 	public SettingFragment() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.addPreferencesFromResource(R.xml.setting);
 		context = this.getActivity();
 		SharedPreferences sp = context.getSharedPreferences("localSave",
 				context.MODE_WORLD_READABLE);
+		
 		Preference pp = this.findPreference("acount");
+
+		String summary = sp.getString("classes", "") + '\t';
+		summary += sp.getString("phone", "") + '\t';
+		summary += sp.getBoolean("pass_status", false) == true ? "已通过" : "未通过");
+			
 		pp.setTitle(sp.getString("name", ""));
-		pp.setSummary(sp.getString("classes", "") + '\t'
-				+ sp.getString("phone", "") + '\t'
-				+ (sp.getBoolean("pass_status", false) == true ? "已通过" : "未通过"));
+		pp.setSummary(summary);
+
 		this.findPreference("change").setOnPreferenceClickListener(
 				new OnPreferenceClickListener() {
 
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						// TODO Auto-generated method stub
 						Intent intent = new Intent(context, ChangeMessage.class);
 						context.startActivity(intent);
 						return true;
 					}
 				});
+		
 		this.findPreference("about").setOnPreferenceClickListener(
 				new OnPreferenceClickListener() {
 
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						// TODO Auto-generated method stub
 						Intent intent = new Intent(context, About.class);
 						context.startActivity(intent);
 						return true;
@@ -76,7 +79,6 @@ public class SettingFragment extends PreferenceFragment {
 		 * true; }});
 		 */
 	}
-
 	/*
 	 * @Override public View onCreateView(LayoutInflater inflater, ViewGroup
 	 * container, Bundle savedInstanceState) { // TODO Auto-generated method

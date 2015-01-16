@@ -3,6 +3,7 @@ package com.fanz.app;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.fanz.app.R;
+import com.fanz.util.MessageUtil;
 import com.fanz.widget.fragment.ListFragment;
 import com.fanz.widget.fragment.MyListFragment;
 import com.fanz.widget.fragment.SettingFragment;
@@ -20,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 /**
  * 程序主界面 包含三个fragment 分别为实验室列表、我的预约列表、设置
  * 
@@ -27,6 +29,9 @@ import android.widget.Toast;
  * @version 1.0 2015.01.15
  */
 public class Main extends Activity {
+=======
+public class Main extends BaseActivity {
+>>>>>>> FETCH_HEAD
 
 	private boolean prepareExit = false;
 	private Fragment listFragment, myListFragment, settingFragment;
@@ -34,11 +39,11 @@ public class Main extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.main);
+
+		// 初始化fragments
 		listFragment = new ListFragment();
 		myListFragment = new MyListFragment();
 		settingFragment = new SettingFragment();
@@ -51,51 +56,43 @@ public class Main extends Activity {
 
 	/** 显示实验室列表的fragment */
 	public void showList(View v) {
-		getFragmentManager().beginTransaction()
-				.replace(R.id.container, listFragment).commit();
+		showFragment(v, listFragment);
 	}
 
 	/** 显示我的预约列表的fragment */
 	public void showMyList(View v) {
-		getFragmentManager().beginTransaction()
-				.replace(R.id.container, myListFragment).commit();
+		showFragment(v, myListFragment);
 	}
 
 	/** 显示设置的fragment */
 	public void showConfiguration(View v) {
+		showFragment(v, settingFragment);
+	}
+
+	private void showFragment(View v, Fragment fragment) {
 		getFragmentManager().beginTransaction()
-				.replace(R.id.container, settingFragment).commit();
+				.replace(R.id.container, fragment).commit();
 	}
 
 	/** 监听用户按键，实现提示双击退出应用效果 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (!prepareExit) {
 				prepareExit = true;
-				Toast.makeText(Main.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+				MessageUtil.shortMessage(Main.this, "再按一次退出");
 				new Timer().schedule(new TimerTask() {
-
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						prepareExit = false;
 					}
 				}, 2000);
 			} else {
+				// 退出应用
 				Main.this.finish();
 			}
 		}
 		return true;
-	}
-
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-
 	}
 
 	private void setAlarm() {

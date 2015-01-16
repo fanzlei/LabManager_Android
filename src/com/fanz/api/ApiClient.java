@@ -1,6 +1,6 @@
 package com.fanz.api;
 
-import com.fanz.model.Appo;
+import com.fanz.model.Appointment;
 import com.fanz.model.Lab;
 import com.fanz.model.User;
 
@@ -26,11 +26,17 @@ public interface ApiClient {
 	/** 获取实验室的管理教师信息 */
 	void getTeacherByLab_no(Lab lab);
 
+<<<<<<< HEAD
 	/** 预约实验室 */
 	void addAppo(Appo appo);
 
 	/** 取消某个预约 */
 	void deleteAppo(Appo appo);
+=======
+	void addAppo(Appointment appo);
+
+	void deleteAppo(Appointment appo);
+>>>>>>> FETCH_HEAD
 
 	/** 获取实验室列表 */
 	void getLabList();
