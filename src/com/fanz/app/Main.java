@@ -20,11 +20,17 @@ import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 程序主界面 包含三个fragment 分别为实验室列表、我的预约列表、设置
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class Main extends Activity {
 
-	boolean prepareExit = false;
-	Fragment listFragment, myListFragment, settingFragment;
-	ListView listView;
+	private boolean prepareExit = false;
+	private Fragment listFragment, myListFragment, settingFragment;
+	private ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +49,25 @@ public class Main extends Activity {
 		// setAlarm();
 	}
 
+	/** 显示实验室列表的fragment */
 	public void showList(View v) {
 		getFragmentManager().beginTransaction()
 				.replace(R.id.container, listFragment).commit();
 	}
 
+	/** 显示我的预约列表的fragment */
 	public void showMyList(View v) {
 		getFragmentManager().beginTransaction()
 				.replace(R.id.container, myListFragment).commit();
 	}
 
+	/** 显示设置的fragment */
 	public void showConfiguration(View v) {
 		getFragmentManager().beginTransaction()
 				.replace(R.id.container, settingFragment).commit();
 	}
 
+	/** 监听用户按键，实现提示双击退出应用效果 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub

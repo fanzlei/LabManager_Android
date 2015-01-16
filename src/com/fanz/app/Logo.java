@@ -12,6 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+/**
+ * 打开应用的Splash界面 显示一张logo的透明度渐变效果
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class Logo extends Activity {
 
 	@Override

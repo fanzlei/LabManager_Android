@@ -3,6 +3,12 @@ package com.fanz.http;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+/**
+ * 网络访问客户端封装
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class SimpleClient {
 	private HttpClient client;
 	private SimpleRequest request;

@@ -1,10 +1,27 @@
+/*
+ * Copyright (C) 2015 Fanz
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.fanz.app;
 
 import java.sql.Date;
 
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Appo;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,13 +34,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 进行实验室预约界面 用户可选择日期，实验人数等进行实验室预约
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class Appointment extends Activity {
 
-	TextView labName, appoint_phone, appoint_name;
-	Spinner date_part, number;
-	DatePicker date;
-	int lab_no;
-	Date dd;
+	private TextView labName, appoint_phone, appoint_name;
+	private Spinner date_part, number;
+	private DatePicker date;
+	private int lab_no;
+	private Date dd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +80,13 @@ public class Appointment extends Activity {
 
 	}
 
+	/** 点击取消按钮，取消预约并跳转到主界面 */
 	public void cancle(View v) {
 		this.startActivity(new Intent(this, Main.class));
 
 	}
 
+	/** 点击确定按钮，实验室预约 */
 	public void make(View v) {
 		SharedPreferences sp = this.getSharedPreferences("localSave",
 				this.MODE_WORLD_READABLE);
@@ -73,7 +98,7 @@ public class Appointment extends Activity {
 			appo.setName(appoint_name.getText().toString());
 			appo.setDate(new Date(date.getYear() - 1900, date.getMonth(), date
 					.getDayOfMonth()));
-			new ApiClientImpl(this).addAppo(appo);
+			ApiClientFactory.createApiClient(this).addAppo(appo);
 		} else {
 			Toast.makeText(this, "您的账号尚未被审核通过，请联系管理员", Toast.LENGTH_SHORT)
 					.show();

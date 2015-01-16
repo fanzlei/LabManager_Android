@@ -9,6 +9,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 /**
  * 请求参数封装类 这里Android端只是向服务器发送POST请求
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
  * */
 public class SimpleRequestParam {
 

@@ -20,9 +20,10 @@ import com.fanz.widget.fragment.MyListFragment;
  * 网络访问返回结果处理类 对不同的网络请求分别进行不同处理
  * 
  * @author Fanz
- * 
+ * @version 1.0 2015.01.15
  * */
 public class ResponseOperator {
+	/** 用户登录请求结果处理 */
 	public static void doLogin(String jsonString) {
 
 		Context context = ApiClientImpl.context;
@@ -55,6 +56,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 用户注册请求结果处理 */
 	public static void doRegister(String jsonString) {
 		try {
 			JSONObject jo = new JSONObject(jsonString);
@@ -74,6 +76,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 修改用于信息请求结果处理 */
 	public static void doUpdateUser(String jsonString) {
 		try {
 			JSONObject ujo = new JSONObject(jsonString);
@@ -92,6 +95,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 获取我的列表请求结果处理 */
 	public static void doGetMyList(String jsonString) {
 		try {
 			JSONArray ja = new JSONArray(jsonString);
@@ -105,6 +109,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 获取实验室管理教师请求结果处理 */
 	public static void doGetTeacherByLab_no(String jsonString) {
 		try {
 			JSONObject jo = new JSONObject(jsonString);
@@ -119,6 +124,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 实验室预约请求结果处理 */
 	public static void doAdd(String jsonString) {
 		try {
 			JSONObject jo = new JSONObject(jsonString);
@@ -137,6 +143,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 取消预约请求结果处理 */
 	public static void doDelete(String jsonString) {
 		try {
 			JSONObject djo = new JSONObject(jsonString);
@@ -159,6 +166,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 获取实验室列表请求结果处理 */
 	public static void doGetLabList(String jsonString) {
 		try {
 			JSONArray ja = new JSONArray(jsonString);
@@ -172,6 +180,7 @@ public class ResponseOperator {
 		}
 	}
 
+	/** 获取某个实验室预约列表请求结果处理 */
 	public static void doGetAppoListByLab_no(String jsonString) {
 		JSONArray jaa;
 		try {

@@ -4,6 +4,9 @@ import org.apache.http.client.methods.HttpPost;
 
 /**
  * 网络请求封装类 这里只用到了Android端发送POST请求
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
  * */
 public class SimpleRequest {
 	/** post请求 */

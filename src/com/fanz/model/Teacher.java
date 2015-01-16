@@ -3,6 +3,12 @@ package com.fanz.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 教师信息
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class Teacher {
 
 	private int id = -1;

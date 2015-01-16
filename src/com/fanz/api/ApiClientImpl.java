@@ -12,7 +12,7 @@ import android.content.Context;
  * ApiClient接口实现类
  * 
  * @author fanz
- *
+ * @version 1.0 2015.01.15
  */
 public class ApiClientImpl implements ApiClient {
 	public static Context context;

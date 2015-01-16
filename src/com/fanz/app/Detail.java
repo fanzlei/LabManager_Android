@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.Lab;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,12 +26,19 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+/**
+ * 实验室预约列表显示界面
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class Detail extends Activity {
 
-	static ListView listView;
-	static JSONArray ja;
-	static JSONObject jo;
-	static Activity activity;
+	private static ListView listView;
+	private static JSONArray ja;
+	private static JSONObject jo;
+	private static Activity activity;
+	/** 处理服务器返回信息的Handler */
 	public static Handler handler = new Handler() {
 
 		@Override
@@ -62,10 +73,11 @@ public class Detail extends Activity {
 		TextView Tname = (TextView) this.findViewById(R.id.detail_name);
 		Tname.setText(name);
 		listView = (ListView) this.findViewById(R.id.detail_list);
-		new ApiClientImpl(this).getAppoListByLab_no(lab);
-		new ApiClientImpl(this).getTeacherByLab_no(lab);
+		ApiClientFactory.createApiClient(this).getAppoListByLab_no(lab);
+		ApiClientFactory.createApiClient(this).getTeacherByLab_no(lab);
 	}
 
+	/** 设置显示实验室管理教师信息 */
 	private static void setTeacherMessage() {
 		// TODO Auto-generated method stub
 		TextView tv = (TextView) activity
@@ -79,6 +91,7 @@ public class Detail extends Activity {
 		}
 	}
 
+	/** 设置实验室预约列表适配器 */
 	private static void setAdapter() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < ja.length(); i++) {
@@ -110,6 +123,7 @@ public class Detail extends Activity {
 		listView.setAdapter(adapter);
 	}
 
+	/** 实验室预约时间段转换为文字形式 */
 	private static String date_partToString(int i) {
 		switch (i) {
 		case 1:
@@ -128,6 +142,7 @@ public class Detail extends Activity {
 
 	}
 
+	/** 点击我要预约按钮，进入实验室预约界面 */
 	public void appointment(View v) {
 		Intent intent = new Intent(this, Appointment.class);
 		Bundle bundle = this.getIntent().getExtras();
@@ -136,6 +151,7 @@ public class Detail extends Activity {
 
 	}
 
+	/** 点击返回按钮，返回主界面 */
 	public void back(View v) {
 		Intent intent = new Intent(this, Main.class);
 		this.startActivity(intent);

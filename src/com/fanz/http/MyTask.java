@@ -9,12 +9,15 @@ import com.fanz.util.NetUtils;
 import android.os.AsyncTask;
 
 /**
- * 异步任务网络访问
- * */
+ * 异步任务访问网络
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class MyTask extends AsyncTask<Object, java.lang.Void, Object> {
 
-	SimpleClient simpleClient;
-	String tag = "";
+	private SimpleClient simpleClient;
+	private String tag = "";
 
 	@Override
 	protected Object doInBackground(Object... params) {

@@ -1,8 +1,10 @@
 package com.fanz.app;
 
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.model.User;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +13,15 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 用户注册界面
+ * 
+ * @author fanz
+ * @version 1.0 2015.01.15
+ */
 public class Register extends Activity {
 
-	EditText name, pass, phone, classes;
+	private EditText name, pass, phone, classes;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,7 @@ public class Register extends Activity {
 
 	}
 
+	/** 点击注册按钮，根据用户输入信息进行账户注册 */
 	public void register(View v) {
 		if (name.getText().toString().trim().length() > 0
 				&& pass.getText().toString().trim().length() > 0
@@ -40,7 +49,7 @@ public class Register extends Activity {
 			user.setPass(pass.getText().toString().trim());
 			user.setPhone(phone.getText().toString().trim());
 			user.setClasses(classes.getText().toString().trim());
-			new ApiClientImpl(this).register(user);
+			ApiClientFactory.createApiClient(this).register(user);
 		} else {
 			Toast.makeText(this, "请输入正确格式信息", Toast.LENGTH_SHORT).show();
 		}

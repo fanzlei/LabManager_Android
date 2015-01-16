@@ -13,22 +13,32 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.fanz.app.R;
+import com.fanz.api.ApiClientFactory;
 import com.fanz.api.ApiClientImpl;
 import com.fanz.app.Detail;
 
+/**
+ * 显示实验室列表的fragment
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class ListFragment extends Fragment {
 
-	static ListView listView;
-	static JSONArray ja;
-	static Context context;
+	private static ListView listView;
+	private static JSONArray ja;
+	private static Context context;
 	public static Handler handler = new Handler() {
 
 		@Override
@@ -41,6 +51,7 @@ public class ListFragment extends Fragment {
 			}
 		}
 
+		/** 设置显示实验室列表的适配器 */
 		private void setAdapter() {
 			// TODO Auto-generated method stub
 
@@ -94,9 +105,10 @@ public class ListFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		context = this.getActivity();
-		new ApiClientImpl(context).getLabList();
+		ApiClientFactory.createApiClient(context).getLabList();
 		listView = (ListView) this.getActivity().findViewById(
 				R.id.list_fragment_list);
+		//实验室列表列表项用户点击事件监听
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,

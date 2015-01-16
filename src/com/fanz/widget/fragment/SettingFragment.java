@@ -11,9 +11,15 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 
+/**
+ * 显示设置的fragment
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class SettingFragment extends PreferenceFragment {
 
-	Context context;
+	private Context context;
 
 	public SettingFragment() {
 		// TODO Auto-generated constructor stub

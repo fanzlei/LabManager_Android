@@ -3,7 +3,12 @@ package com.fanz.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+/**
+ * 网络请求工具类
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
+ * */
 public class NetUtils {
 	/**
 	 * @return 返回从输入流中读取的字符串

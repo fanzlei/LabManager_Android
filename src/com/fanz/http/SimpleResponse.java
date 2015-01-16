@@ -10,6 +10,9 @@ import com.fanz.util.NetUtils;
 
 /**
  * 网络响应封装类
+ * 
+ * @author Fanz
+ * @version 1.0 2015.01.15
  * */
 public class SimpleResponse {
 
